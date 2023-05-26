@@ -1,0 +1,123 @@
+package com.example.baekjoonRanking.model
+
+data class Rank (
+    var name: String,
+    var rank:RankType,
+    var solved: Int
+)
+
+enum class RankType {
+    RUBY,
+    DIA,
+    FLA,
+    SILVER,
+    BRONZE
+}
+
+public val ranks: List<Rank> = arrayListOf(
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+    Rank(
+        "hhhello0507",
+        RankType.RUBY,
+        500
+    ),
+)

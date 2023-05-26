@@ -1,0 +1,149 @@
+package com.example.baekjoonRanking
+
+import android.os.Bundle
+import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.baekjoonRanking.model.Rank
+import com.example.baekjoonRanking.model.RankType
+import com.example.baekjoonRanking.model.ranks
+import com.example.baekjoonRanking.network.Retrofit
+import com.example.baekjoonRanking.ui.theme.BaekjoonRankingTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
+
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = Retrofit.getUser("hhhello0507")
+            val solved = user.solvedCount
+            Log.d("로그", "solved - $solved")
+        }
+        setContent {
+            BaekjoonRankingTheme(
+                darkTheme = true,
+            ) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        TitleText(title = "Baekjoon Ranking")
+                        Spacer(modifier = Modifier.height(10.dp))
+                        LazyColumn {
+                            items(ranks) {
+                                    rank ->
+                                RankingText(rank)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TitleText(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleLarge
+    )
+}
+
+@Composable
+fun RankingText(rank: Rank) {
+    var isExpanded by remember { mutableStateOf(false) }
+
+    Card(modifier = Modifier
+        .width(280.dp)
+        .height(40.dp)
+        .clickable { isExpanded = !isExpanded },
+        shape = RoundedCornerShape(
+            topStart = 0.dp,
+            topEnd = 0.dp,
+            bottomStart = 0.dp,
+            bottomEnd = 0.dp,
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = if (isExpanded) Color.Black else Color.White,
+        ),
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = rank.name,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(end = 10.dp),
+                color = if (isExpanded) Color.White else Color.Black
+            )
+            Text(
+                text = rank.solved.toString() + " solved",
+                style = MaterialTheme.typography.labelLarge,
+                color = if (isExpanded) Color.White else Color.Black
+            )
+        }
+    }
+    Spacer(modifier = Modifier.height(20.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    BaekjoonRankingTheme(
+        darkTheme = true,
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TitleText(title = "Baekjoon Ranking")
+                Spacer(modifier = Modifier.height(10.dp))
+                LazyColumn {
+                    items(ranks) {
+                        rank ->
+                        RankingText(rank)
+                    }
+                }
+            }
+        }
+
+    }
+}
