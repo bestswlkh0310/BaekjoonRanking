@@ -17,9 +17,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,16 +31,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.baekjoonRanking.model.Rank
-import com.example.baekjoonRanking.model.RankType
 import com.example.baekjoonRanking.model.ranks
 import com.example.baekjoonRanking.network.Retrofit
 import com.example.baekjoonRanking.ui.theme.BaekjoonRankingTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 
 
@@ -54,26 +56,38 @@ class MainActivity : ComponentActivity() {
             BaekjoonRankingTheme(
                 darkTheme = true,
             ) {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        TitleText(title = "Baekjoon Ranking")
-                        Spacer(modifier = Modifier.height(10.dp))
-                        LazyColumn {
-                            items(ranks) {
-                                    rank ->
-                                RankingText(rank)
-                            }
-                        }
+                ContentView()
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ContentView() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Scaffold(topBar = { MyAppBar() }) { it -> it.toString()
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TitleText(title = "Baekjoon Ranking")
+                Spacer(modifier = Modifier.height(10.dp))
+                LazyColumn {
+                    items(ranks) {
+                            rank ->
+                        RankingText(rank)
                     }
                 }
             }
         }
     }
+}
+
+@Composable
+fun MyAppBar() {
 }
 
 @Composable
@@ -127,23 +141,6 @@ fun GreetingPreview() {
     BaekjoonRankingTheme(
         darkTheme = true,
     ) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                TitleText(title = "Baekjoon Ranking")
-                Spacer(modifier = Modifier.height(10.dp))
-                LazyColumn {
-                    items(ranks) {
-                        rank ->
-                        RankingText(rank)
-                    }
-                }
-            }
-        }
-
+        ContentView()
     }
 }

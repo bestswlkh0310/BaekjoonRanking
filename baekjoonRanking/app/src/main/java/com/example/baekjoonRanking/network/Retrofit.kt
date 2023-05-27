@@ -1,10 +1,7 @@
 package com.example.baekjoonRanking.network
 
-import android.util.Log
 import com.example.baekjoonRanking.model.User
 import com.example.baekjoonRanking.network.response.UserResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
