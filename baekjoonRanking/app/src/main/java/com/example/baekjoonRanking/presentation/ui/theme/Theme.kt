@@ -1,4 +1,4 @@
-package com.example.baekjoonRanking.ui.theme
+package com.example.baekjoonRanking.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

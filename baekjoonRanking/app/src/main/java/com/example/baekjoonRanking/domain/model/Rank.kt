@@ -1,8 +1,8 @@
-package com.example.baekjoonRanking.model
+package com.example.baekjoonRanking.domain.model
 
 data class Rank (
     var name: String,
-    var rank:RankType,
+    var rank: RankType,
     var solved: Int
 )
 

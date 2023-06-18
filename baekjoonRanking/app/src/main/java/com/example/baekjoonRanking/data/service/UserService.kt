@@ -1,11 +1,13 @@
-package com.example.baekjoonRanking.network
+package com.example.baekjoonRanking.data.service
 
-import com.example.baekjoonRanking.network.response.UserResponse
+import com.example.baekjoonRanking.data.response.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface UserService {
     @GET("user/show")
-    fun getUser(@Query("handle") userId: String): Call<UserResponse>
+    suspend fun getUser(
+        @Query("handle") userId: String
+    ): UserResponse
 }

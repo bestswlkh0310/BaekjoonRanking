@@ -1,4 +1,6 @@
-package com.example.baekjoonRanking.network.response
+package com.example.baekjoonRanking.data.response
+
+import com.example.baekjoonRanking.domain.model.User
 
 data class UserResponse(
     val backgroundId: String,
@@ -28,4 +30,10 @@ data class UserResponse(
     val stardusts: Int,
     val tier: Int,
     val voteCount: Int
+)
+
+fun UserResponse.toEntity() = User(
+    this.handle,
+    this.tier,
+    this.solvedCount
 )

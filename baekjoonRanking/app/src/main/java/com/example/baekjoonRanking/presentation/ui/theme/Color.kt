@@ -1,4 +1,4 @@
-package com.example.baekjoonRanking.ui.theme
+package com.example.baekjoonRanking.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

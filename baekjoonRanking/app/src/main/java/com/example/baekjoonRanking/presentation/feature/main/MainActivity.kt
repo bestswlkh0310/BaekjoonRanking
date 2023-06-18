@@ -1,9 +1,10 @@
-package com.example.baekjoonRanking.presentation.ui
+package com.example.baekjoonRanking.presentation.feature.main
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,28 +35,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.baekjoonRanking.domain.model.Rank
 import com.example.baekjoonRanking.domain.model.ranks
-import com.example.baekjoonRanking.data.repository.UserRepositoryImpl
-import com.example.baekjoonRanking.domain.repository.UserRepository
 import com.example.baekjoonRanking.presentation.ui.theme.BaekjoonRankingTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity @Inject constructor(
-    private val userRepository: UserRepository
-) : ComponentActivity() {
+class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
-        CoroutineScope(Dispatchers.IO).launch {
-            val user = userRepository.getUser("hhhello0507")
-            val solved = user.solvedCount
-            Log.d("로그", "solved - $solved")
-        }
+        viewModel.getUser("hhhello0507")
         setContent {
             BaekjoonRankingTheme(
                 darkTheme = true,
@@ -73,7 +62,7 @@ fun ContentView() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Scaffold(topBar = { MyAppBar() }) { it -> it.toString()
+        Scaffold(topBar = { MyAppBar() }) { it.toString()
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
