@@ -5,6 +5,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">22sp</item>
     </style>
+    <style name="text">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <style name="buttonStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:width">293dp</item>
         <item name="android:height">57dp</item>

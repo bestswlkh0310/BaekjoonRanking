@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dgswbjrank.presentation.feature.onboard.OnBoardActivity">
+    tools:context=".presentation.feature.onboard.OnBoardActivity">
     <data>
         <variable
             name="vm"
-            type="com.bestswlkh0310.dgswbjrank.presentation.feature.onboard.OnBoardViewModel" />
+            type="com.bestswlkh0310.presentation.feature.onboard.OnBoardViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

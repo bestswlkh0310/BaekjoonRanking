@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace="com.bestswlkh0310"
+    namespace="com.bestswlkh0310.domain"
 
     compileSdk = 34
 
@@ -15,6 +15,13 @@ android {
         targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
