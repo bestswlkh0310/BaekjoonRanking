@@ -14,17 +14,17 @@ import javax.inject.Inject
 class SignupAViewModel @Inject constructor(
     private val userUseCase: UserUseCase
 ): BaseViewModel() {
-    val nickName = MutableLiveData<String>()
-    val nickNameState = MutableLiveData<Boolean>()
+    val nickName = MutableLiveData<String>("")
+    val nickNameState = MutableLiveData<Boolean>(false)
 
     val bjId = MutableLiveData<String>("")
-    val bjIdState = MutableLiveData<Boolean>()
+    val bjIdState = MutableLiveData<Boolean>(false)
 
-    val bjIdDetail = MutableLiveData<String>()
+    val bjIdDetail = MutableLiveData<String>("")
     val bjIdCheckState = MutableLiveData<Boolean>(false)
 
-    val pw = MutableLiveData<String>()
-    val pwState = MutableLiveData<Boolean>()
+    val pw = MutableLiveData<String>("")
+    val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickNext() {
         viewModelScope.launch(Dispatchers.IO) {

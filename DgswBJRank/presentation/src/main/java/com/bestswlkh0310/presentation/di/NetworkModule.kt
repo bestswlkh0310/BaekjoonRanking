@@ -1,6 +1,8 @@
 package com.bestswlkh0310.presentation.di
 
+import com.bestswlkh0310.data.api.AuthApi
 import com.bestswlkh0310.data.api.UserApi
+import com.bestswlkh0310.presentation.util.Constant.MY_URL
 import com.bestswlkh0310.presentation.util.Constant.SOLVED_URL
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -11,13 +13,27 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.SecureRandom
-import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class SolvedOkHttpClient
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class SolvedRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MyOkHttpClient
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class MyRetrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -25,11 +41,18 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
+    @SolvedRetrofit
+    fun provideUserApi(@SolvedRetrofit retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
     @Singleton
     @Provides
-    fun provideOkHttpClient(
+    @MyRetrofit
+    fun provideAuthApi(@MyRetrofit retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+
+    @MyOkHttpClient
+    @Singleton
+    @Provides
+    fun provideMyOkHttpClient(
         LoggerInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient().newBuilder()
@@ -37,26 +60,40 @@ object NetworkModule {
         okHttpClientBuilder.readTimeout(60, TimeUnit.SECONDS)
         okHttpClientBuilder.writeTimeout(60, TimeUnit.SECONDS)
         okHttpClientBuilder.addInterceptor(LoggerInterceptor)
-        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-            override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
-            override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
-            override fun getAcceptedIssuers(): Array<X509Certificate> { return arrayOf() }
-        })
-
-        val sslContext = SSLContext.getInstance("SSL")
-        sslContext.init(null, trustAllCerts, SecureRandom())
-
-        val sslSocketFactory = sslContext.socketFactory
-
-        okHttpClientBuilder.sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
-        okHttpClientBuilder.hostnameVerifier { hostname, session -> true }
 
         return okHttpClientBuilder.build()
     }
 
+    @SolvedOkHttpClient
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun provideSolvedOkHttpClient(
+        LoggerInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        val okHttpClientBuilder = OkHttpClient().newBuilder()
+        okHttpClientBuilder.connectTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.readTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.writeTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.addInterceptor(LoggerInterceptor)
+
+        return okHttpClientBuilder.build()
+    }
+
+    @MyRetrofit
+    @Singleton
+    @Provides
+    fun provideMyRetrofit(@MyOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(MY_URL)
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
+    @SolvedRetrofit
+    @Singleton
+    @Provides
+    fun provideSolvedRetrofit(@SolvedOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(SOLVED_URL)
             .client(okHttpClient)

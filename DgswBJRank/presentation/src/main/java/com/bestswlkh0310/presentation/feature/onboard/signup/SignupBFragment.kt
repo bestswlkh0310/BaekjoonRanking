@@ -16,6 +16,11 @@ class SignupBFragment: BaseFragment<FragmentSignupBBinding, SignupBViewModel>() 
     private val args by navArgs<SignupBFragmentArgs>()
 
     override fun observerViewModel() {
+        with(viewModel) {
+            nickname.value = args.nickName
+            pw.value = args.pw
+            bjId.value = args.bjId
+        }
         bindingViewEvent { event ->
             when (event) {
                 SIGN_UP -> findNavController().popBackStack(R.id.startFragment, false)
