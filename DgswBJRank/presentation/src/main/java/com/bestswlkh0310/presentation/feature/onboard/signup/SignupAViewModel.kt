@@ -1,9 +1,11 @@
 package com.bestswlkh0310.presentation.feature.onboard.signup
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.traveling.domain.usecase.UserUseCase
 import com.bestswlkh0310.presentation.base.BaseViewModel
+import com.bestswlkh0310.presentation.util.Constant.TAAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,6 +48,7 @@ class SignupAViewModel @Inject constructor(
     fun onClickCheck() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                Log.d(TAAG, "${bjId.value} - onClickCheck() called")
                 userUseCase.getUser(bjId.value!!)
                 bjIdCheckState.postValue(true)
                 bjIdDetail.postValue("그런 아이디는 있네요")

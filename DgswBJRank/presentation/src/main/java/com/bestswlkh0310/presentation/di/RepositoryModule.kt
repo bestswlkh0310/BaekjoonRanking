@@ -18,7 +18,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(@SolvedRetrofit userApi: UserApi): UserRepository =
+    fun provideUserRepository(@MyRetrofit userApi: UserApi): UserRepository =
         UserRepositoryImpl(userApi)
 
     @Singleton

@@ -34,8 +34,8 @@ class SignupAFragment: BaseFragment<FragmentSignupABinding, SignupAViewModel>() 
             when (event) {
                 NOT_FOUND_BJ_ID -> Toast.makeText(activity, "백준 아이디를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
                 FOUND_BJ_ID -> findNavController().navigate(SignupAFragmentDirections.actionSignupAFragmentToSignupBFragment(
-                    viewModel.nickName.value!!,
                     viewModel.bjId.value!!,
+                    viewModel.nickName.value!!,
                     viewModel.pw.value!!
                 ))
             }

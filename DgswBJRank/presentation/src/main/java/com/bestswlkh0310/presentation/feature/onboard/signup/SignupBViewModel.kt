@@ -8,6 +8,7 @@ import com.traveling.domain.usecase.AuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,19 +24,28 @@ class SignupBViewModel @Inject constructor(
 
     fun onClickSignup() {
         viewModelScope.launch(Dispatchers.IO) {
-            authUseCase.signupUser(
-                SignupRequest(
-                    nickname = nickname.value!!,
-                    pw = pw.value!!,
-                    bjId = bjId.value!!,
-                    intro = intro.value!!,
-                    goal = goal.value!!
+            try {
+                authUseCase.signupUser(
+                    SignupRequest(
+                        nickname = nickname.value!!,
+                        pw = pw.value!!,
+                        bjId = bjId.value!!,
+                        intro = intro.value!!,
+                        goal = goal.value!!
+                    )
                 )
-            )
+                withContext(Dispatchers.Main) {
+                    viewEvent(SIGN_UP)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    viewEvent(CAN_NOT_SIGN_UP)
+                }
+            }
         }
-        viewEvent(SIGN_UP)
     }
     companion object {
         const val SIGN_UP = 0
+        const val CAN_NOT_SIGN_UP = 1
     }
 }

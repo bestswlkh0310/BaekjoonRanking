@@ -6,11 +6,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface UserApi {
-    @GET("user/show")
+    @GET("/rank/list")
     suspend fun getUser(
-        @Query("handle") handle: String
-    ): UserResponse
-
-//    @POST
-//    suspend fun
+        @Query("bjId") bjId: String
+    ): List<UserResponse>
 }

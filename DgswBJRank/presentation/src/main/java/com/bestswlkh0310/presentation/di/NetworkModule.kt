@@ -3,7 +3,6 @@ package com.bestswlkh0310.presentation.di
 import com.bestswlkh0310.data.api.AuthApi
 import com.bestswlkh0310.data.api.UserApi
 import com.bestswlkh0310.presentation.util.Constant.MY_URL
-import com.bestswlkh0310.presentation.util.Constant.SOLVED_URL
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -20,14 +19,6 @@ import javax.inject.Singleton
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class SolvedOkHttpClient
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class SolvedRetrofit
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
 annotation class MyOkHttpClient
 
 
@@ -41,33 +32,18 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @SolvedRetrofit
-    fun provideUserApi(@SolvedRetrofit retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
+    @MyRetrofit
+    fun provideAuthApi(@MyRetrofit retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Singleton
     @Provides
     @MyRetrofit
-    fun provideAuthApi(@MyRetrofit retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+    fun provideUserApi(@MyRetrofit retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
 
     @MyOkHttpClient
     @Singleton
     @Provides
     fun provideMyOkHttpClient(
-        LoggerInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient {
-        val okHttpClientBuilder = OkHttpClient().newBuilder()
-        okHttpClientBuilder.connectTimeout(60, TimeUnit.SECONDS)
-        okHttpClientBuilder.readTimeout(60, TimeUnit.SECONDS)
-        okHttpClientBuilder.writeTimeout(60, TimeUnit.SECONDS)
-        okHttpClientBuilder.addInterceptor(LoggerInterceptor)
-
-        return okHttpClientBuilder.build()
-    }
-
-    @SolvedOkHttpClient
-    @Singleton
-    @Provides
-    fun provideSolvedOkHttpClient(
         LoggerInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient().newBuilder()
@@ -85,17 +61,6 @@ object NetworkModule {
     fun provideMyRetrofit(@MyOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(MY_URL)
-            .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
-            .build()
-    }
-
-    @SolvedRetrofit
-    @Singleton
-    @Provides
-    fun provideSolvedRetrofit(@SolvedOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(SOLVED_URL)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()
