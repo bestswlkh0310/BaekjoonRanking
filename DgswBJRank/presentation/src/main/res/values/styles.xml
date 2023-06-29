@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="title">
+    <style name="blackTitle">
+        <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">22sp</item>
     </style>
-    <style name="text">
+    <style name="whiteTitle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
+    <style name="blackText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="whiteText">
+        <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
     </style>
@@ -16,17 +30,16 @@
     </style>
 
     <style name="button1" parent="buttonStyle">
-        <item name="android:background">@drawable/blue_button_background</item>
+        <item name="android:background">@drawable/btn_blue</item>
         <item name="android:textColor">@color/white</item>
     </style>
     <style name="button2" parent="buttonStyle">
-        <item name="android:background">@drawable/blue_input_background</item>
+        <item name="android:background">@drawable/input_blue</item>
         <item name="android:textColor">@color/main50</item>
     </style>
     <style name="button3" parent="buttonStyle">
-        <item name="android:background">@drawable/black_input_background</item>
+        <item name="android:background">@drawable/input_black</item>
         <item name="android:textColorHint">@color/black</item>
-        <item name="android:textColorHighlight"></item>
     </style>
     <style name="button4" parent="buttonStyle">
         <item name="android:background">@drawable/gray_input_background</item>

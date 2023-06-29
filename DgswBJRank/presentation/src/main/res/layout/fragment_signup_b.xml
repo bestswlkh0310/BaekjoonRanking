@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/title"
+            style="@style/blackTitle"
             android:text="여기서부터는 선택이에요"
             />
         <EditText

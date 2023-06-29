@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.bestswlkh0310.presentation.feature.main.rank.adapter.RankViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="69dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="15dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="1"
+                    android:layout_marginStart="20dp"
+                    style="@style/blackText"/>
+                <TextView
+                    android:id="@+id/nickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/rank"
+                    app:layout_constraintTop_toTopOf="@id/rank"
+                    app:layout_constraintBottom_toBottomOf="@id/rank"
+                    android:layout_marginStart="24dp"
+                    android:text="lkh0310"
+                    style="@style/blackText"/>
+                <TextView
+                    android:id="@+id/solve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/rank"
+                    app:layout_constraintBottom_toBottomOf="@id/rank"
+                    android:layout_marginEnd="20dp"
+                    android:text="20 solve"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

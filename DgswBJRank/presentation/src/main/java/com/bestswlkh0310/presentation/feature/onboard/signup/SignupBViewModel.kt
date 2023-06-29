@@ -27,7 +27,7 @@ class SignupBViewModel @Inject constructor(
             try {
                 authUseCase.signupUser(
                     SignupRequest(
-                        nickname = nickname.value!!,
+                        nickName = nickname.value!!,
                         pw = pw.value!!,
                         bjId = bjId.value!!,
                         intro = intro.value!!,

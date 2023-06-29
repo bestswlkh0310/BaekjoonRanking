@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/title"
+            style="@style/blackTitle"
             android:text="당신은 누구세요"
             />
         <androidx.appcompat.widget.AppCompatEditText

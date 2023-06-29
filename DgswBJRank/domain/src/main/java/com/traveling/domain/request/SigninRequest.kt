@@ -1,6 +1,6 @@
 package com.traveling.domain.request
 
 data class SigninRequest(
-    val nickname: String,
+    val nickName: String,
     val pw: String
 )

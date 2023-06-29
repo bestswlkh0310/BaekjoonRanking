@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.traveling.domain.usecase.UserUseCase
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
+import com.traveling.domain.request.VerifyRequest
+import com.traveling.domain.usecase.AuthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupAViewModel @Inject constructor(
-    private val userUseCase: UserUseCase
+    private val userUseCase: UserUseCase,
+    private val authUseCase: AuthUseCase
 ): BaseViewModel() {
     val nickName = MutableLiveData<String>("")
     val nickNameState = MutableLiveData<Boolean>(false)
@@ -31,7 +34,7 @@ class SignupAViewModel @Inject constructor(
     fun onClickNext() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                userUseCase.getUser(bjId.value!!)
+                authUseCase.verify(VerifyRequest(bjId.value!!))
                 withContext(Dispatchers.Main) {
                     viewEvent(FOUND_BJ_ID)
                 }
@@ -49,10 +52,12 @@ class SignupAViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 Log.d(TAAG, "${bjId.value} - onClickCheck() called")
-                userUseCase.getUser(bjId.value!!)
+                authUseCase.verify(VerifyRequest(bjId.value!!))
+                Log.d(TAAG, "success - onClickCheck() called")
                 bjIdCheckState.postValue(true)
                 bjIdDetail.postValue("그런 아이디는 있네요")
             } catch (e: Exception) {
+                Log.d(TAAG, "$e - onClickCheck() called")
                 withContext(Dispatchers.Main) {
                     viewEvent(NOT_FOUND_BJ_ID)
                 }
