@@ -6,6 +6,8 @@ import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.bestswlkh0310.presentation.util.Security
+import com.bestswlkh0310.presentation.util.Security.isPasswordValid
+import com.bestswlkh0310.presentation.util.Security.isUsernameValid
 import com.traveling.domain.repository.AuthRepository
 import com.traveling.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +27,8 @@ class LoginViewModel @Inject constructor(
 
     fun onClickLogin() {
         if (nickName.value!! == "" || pw.value!! == "") {
+            viewEvent(WRONG_INPUT)
+        } else if (!isPasswordValid(pw.value!!) || !isUsernameValid(nickName.value!!)) {
             viewEvent(CAN_NOT_LOGIN)
         } else {
             add(authRepository.signInUser(
@@ -52,5 +56,6 @@ class LoginViewModel @Inject constructor(
     companion object {
         const val LOGIN = 0
         const val CAN_NOT_LOGIN = 1
+        const val WRONG_INPUT = 3
     }
 }

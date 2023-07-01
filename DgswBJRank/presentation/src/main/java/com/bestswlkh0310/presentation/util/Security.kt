@@ -3,6 +3,7 @@ package com.bestswlkh0310.presentation.util
 import android.util.Log
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import java.security.MessageDigest
+import java.util.regex.Pattern
 
 object Security {
     fun hashPassword(password: String): String {
@@ -23,5 +24,17 @@ object Security {
         Log.d(TAAG, "${String(hexChars).length} - bytesToHex() called")
         Log.d(TAAG, "${String(hexChars)} - bytesToHex() called")
         return String(hexChars)
+    }
+
+    fun isPasswordValid(password: String): Boolean {
+        val pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^\\w\\s]).{8,12}$")
+        val matcher = pattern.matcher(password)
+        return matcher.matches()
+    }
+
+    fun isUsernameValid(username: String): Boolean {
+        val pattern = Pattern.compile("^[a-zA-Z0-9]{4,12}$")
+        val matcher = pattern.matcher(username)
+        return matcher.matches()
     }
 }

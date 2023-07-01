@@ -30,15 +30,15 @@
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/title"
             android:layout_marginTop="50dp"
-            android:maxLength="10"
+            android:maxLength="12"
             android:paddingStart="18dp"
             android:text="@={vm.nickName}"
             android:textAllCaps="false"
-            android:inputType=""
+            android:inputType="text"
             android:gravity="left|center_vertical"
             android:hint="닉네임을 입력해주세요"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
             style="@style/button4"/>
 
         <TextView
@@ -61,12 +61,12 @@
             android:paddingStart="18dp"
             android:text="@={vm.pw}"
             android:textAllCaps="false"
-            android:inputType="textVisiblePassword"
+            android:inputType="textPassword"
             android:gravity="left|center_vertical"
             android:hint="비밀번호를 입력해주세요"
             android:visibility="@{vm.nickNameState ? View.VISIBLE : View.GONE}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
             style="@style/button4"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_bjId"
@@ -81,8 +81,8 @@
             android:gravity="left|center_vertical"
             android:visibility="@{vm.pwState ? View.VISIBLE : View.GONE}"
             android:hint="백준 아이디를 입력해주세요"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
             style="@style/button4"/>
         <TextView
             android:layout_width="wrap_content"
@@ -96,11 +96,12 @@
             app:layout_constraintEnd_toEndOf="@id/et_nickName"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_check"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="57dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/et_bjId"
             app:layout_constraintTop_toBottomOf="@id/et_bjId"
+            android:layout_marginHorizontal="0dp"
             android:text="백준 아이디 확인"
             android:visibility="@{vm.pwState ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> vm.onClickCheck()}"
@@ -115,7 +116,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

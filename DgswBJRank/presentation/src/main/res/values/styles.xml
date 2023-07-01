@@ -24,9 +24,9 @@
         <item name="android:textSize">16sp</item>
     </style>
     <style name="buttonStyle" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:width">293dp</item>
         <item name="android:height">57dp</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginHorizontal">34dp</item>
     </style>
 
     <style name="button1" parent="buttonStyle">

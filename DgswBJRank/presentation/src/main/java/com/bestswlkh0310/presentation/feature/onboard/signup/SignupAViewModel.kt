@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
+import com.bestswlkh0310.presentation.util.Security.isPasswordValid
+import com.bestswlkh0310.presentation.util.Security.isUsernameValid
 import com.traveling.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,29 +27,33 @@ class SignupAViewModel @Inject constructor(
     val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickNext() {
-        add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
-            when (response.code()) {
-                200 -> {
-                    viewEvent(FOUND_BJ_ID)
+        if (pw.value == "" || nickName.value == "") {
+            viewEvent(WRONG_INPUT)
+        } else if (!isUsernameValid(nickName.value!!)) {
+            viewEvent(WRONG_ID)
+        } else if (!isPasswordValid(pw.value!!)) {
+            viewEvent(WRONG_PW)
+        } else {
+            add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
+                when (response.code()) {
+                    200 -> {
+                        viewEvent(FOUND_BJ_ID)
+                    }
+                    204 -> {
+                        viewEvent(NOT_FOUND_BJ_ID)
+                    }
                 }
-                204 -> {
-                    viewEvent(NOT_FOUND_BJ_ID)
-                }
-            }
-        }, {
-            viewEvent(NETWORK_ERROR)
-        }))
+            }, {
+                viewEvent(NETWORK_ERROR)
+            }))
+        }
     }
 
     fun onClickCheck() {
         add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
             when (response.code()) {
-                200 -> {
-                    bjIdDetail.value = "그런 아이디는 있네요"
-                }
-                204 -> {
-                    viewEvent(NOT_FOUND_BJ_ID)
-                }
+                200 -> bjIdDetail.value = "그런 아이디는 있네요"
+                204 -> viewEvent(NOT_FOUND_BJ_ID)
             }
         }, {
             viewEvent(NETWORK_ERROR)
@@ -56,5 +63,8 @@ class SignupAViewModel @Inject constructor(
     companion object {
         const val NOT_FOUND_BJ_ID = 0
         const val FOUND_BJ_ID = 1
+        const val WRONG_PW = 2
+        const val WRONG_ID = 3
+        const val WRONG_INPUT = 4
     }
 }

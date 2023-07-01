@@ -34,9 +34,11 @@
             android:gravity="left|center_vertical"
             android:text="@={vm.nickName}"
             android:textAllCaps="false"
+            android:maxLength="12"
+            android:inputType="text"
             android:hint="닉네임을 입력해주세요"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
             style="@style/button4"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_pw"
@@ -46,12 +48,14 @@
             android:layout_marginTop="8dp"
             android:paddingStart="18dp"
             android:gravity="left|center_vertical"
+            android:maxLength="20"
             android:visibility="@{vm.nickNameState ? View.VISIBLE : View.GONE}"
             android:text="@={vm.pw}"
+            android:inputType="textPassword"
             android:textAllCaps="false"
             android:hint="비밀번호를 입력해주세요"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
             style="@style/button4"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
@@ -63,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
