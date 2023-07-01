@@ -1,15 +1,13 @@
 package com.bestswlkh0310.presentation.feature.onboard.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
-import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.bestswlkh0310.presentation.util.Security
 import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUsernameValid
-import com.traveling.domain.repository.AuthRepository
-import com.traveling.domain.repository.UserRepository
+import com.bestswlkh0310.domain.repository.AuthRepository
+import com.bestswlkh0310.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,8 +39,11 @@ class LoginViewModel @Inject constructor(
                     200 -> {
                         val refreshToken = response.body()!!.refreshToken
                         val accessToken = response.body()!!.token
-                        DgswBJRankApplication.prefs.refreshToken = refreshToken
-                        DgswBJRankApplication.prefs.accessToken = accessToken
+                        with(DgswBJRankApplication) {
+                            prefs.refreshToken = refreshToken
+                            prefs.accessToken = accessToken
+                            prefs.isAuthToken = true
+                        }
                         viewEvent(LOGIN)
                     }
                     204 -> viewEvent(CAN_NOT_LOGIN)

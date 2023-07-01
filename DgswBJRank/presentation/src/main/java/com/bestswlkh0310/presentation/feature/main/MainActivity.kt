@@ -17,14 +17,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val viewModel: MainViewModel by viewModels()
 
-    override fun observerViewModel() {
-        
-    }
+    override fun observerViewModel() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_main) as NavHostFragment
         val navController = navHostFragment.findNavController()
         mBinding.bottomNav.setupWithNavController(navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.
     }
 }

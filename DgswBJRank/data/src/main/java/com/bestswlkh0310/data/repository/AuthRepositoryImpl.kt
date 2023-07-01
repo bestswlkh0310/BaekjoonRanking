@@ -1,7 +1,7 @@
 package com.bestswlkh0310.data.repository
 
 import com.bestswlkh0310.data.remote.ApiClient
-import com.traveling.domain.repository.AuthRepository
+import com.bestswlkh0310.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(private val apiClient: ApiClient): AuthRepository {

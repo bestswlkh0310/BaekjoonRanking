@@ -21,4 +21,15 @@ class OnBoardActivity: BaseActivity<ActivityOnBoardBinding, OnBoardViewModel>() 
         startActivity(intent)
         finishAffinity()
     }
+
+    override fun onStart() {
+        super.onStart()
+        checkFirst()
+    }
+
+    private fun checkFirst() {
+        if (DgswBJRankApplication.prefs.isAuthToken) {
+            startMainActivity()
+        }
+    }
 }

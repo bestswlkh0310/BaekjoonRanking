@@ -14,6 +14,7 @@ import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.BR
 import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
 import com.bestswlkh0310.presentation.feature.onboard.OnBoardActivity
+import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
@@ -41,7 +42,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
         )
         return mBinding.root
     }
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         performDataBinding()
@@ -65,6 +66,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
                         startActivity(intent)
                         requireActivity().finishAffinity()
                         showToast("토큰이 만료되었어요")
+                        DgswBJRankApplication.prefs.isAuthToken = false
                     }
                 }
             }

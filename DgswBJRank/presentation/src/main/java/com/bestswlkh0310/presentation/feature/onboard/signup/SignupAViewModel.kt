@@ -1,14 +1,11 @@
 package com.bestswlkh0310.presentation.feature.onboard.signup
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
-import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUsernameValid
-import com.traveling.domain.repository.AuthRepository
+import com.bestswlkh0310.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel

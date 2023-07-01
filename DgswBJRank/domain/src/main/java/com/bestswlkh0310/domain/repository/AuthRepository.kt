@@ -1,6 +1,6 @@
-package com.traveling.domain.repository
+package com.bestswlkh0310.domain.repository
 
-import com.traveling.domain.entity.AuthModel
+import com.bestswlkh0310.domain.entity.AuthModel
 import io.reactivex.Single
 import retrofit2.Response
 

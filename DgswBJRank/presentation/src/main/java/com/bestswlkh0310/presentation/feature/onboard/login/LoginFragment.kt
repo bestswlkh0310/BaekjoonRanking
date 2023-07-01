@@ -21,6 +21,7 @@ class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 pwState.value = it != ""
             }
         }
+
         bindingViewEvent {
             when (it) {
                 LOGIN -> if (activity is OnBoardActivity) (activity as OnBoardActivity).startMainActivity()

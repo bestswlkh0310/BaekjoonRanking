@@ -1,7 +1,7 @@
-package com.traveling.domain.repository
+package com.bestswlkh0310.domain.repository
 
-import com.traveling.domain.entity.GrassesModel
-import com.traveling.domain.entity.TodayModel
+import com.bestswlkh0310.domain.entity.GrassesModel
+import com.bestswlkh0310.domain.entity.TodayModel
 import io.reactivex.Single
 import retrofit2.Response
 

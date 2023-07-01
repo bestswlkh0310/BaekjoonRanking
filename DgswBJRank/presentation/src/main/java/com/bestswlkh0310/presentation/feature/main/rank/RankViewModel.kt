@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
-import com.traveling.domain.entity.RankModel
-import com.traveling.domain.repository.AuthRepository
-import com.traveling.domain.repository.UserRepository
+import com.bestswlkh0310.domain.dto.RankModel
+import com.bestswlkh0310.domain.repository.AuthRepository
+import com.bestswlkh0310.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -38,11 +38,13 @@ class RankViewModel @Inject constructor(
                         val realToday = dateFormat.format(currentDate)
                         Log.d(TAAG, "$realToday, ${today.date} - getAllToday() called")
                         val resultValue = if (realToday == today.date.toString()) today.value else 0
-                        rankData.add(RankModel(
+                        rankData.add(
+                            RankModel(
                             it.nickName,
                             today.date,
                             resultValue
-                        ))
+                        )
+                        )
                     }
                     grasses.forEach {
                         Log.d(TAAG, "$it - getAllToday() called")

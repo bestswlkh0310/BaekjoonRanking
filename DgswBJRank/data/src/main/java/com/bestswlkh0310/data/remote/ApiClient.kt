@@ -1,8 +1,8 @@
 package com.bestswlkh0310.data.remote
 
-import com.traveling.domain.entity.AuthModel
-import com.traveling.domain.entity.GrassesModel
-import com.traveling.domain.entity.TodayModel
+import com.bestswlkh0310.domain.entity.AuthModel
+import com.bestswlkh0310.domain.entity.GrassesModel
+import com.bestswlkh0310.domain.entity.TodayModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

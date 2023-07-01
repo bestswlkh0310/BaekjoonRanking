@@ -1,4 +1,4 @@
-package com.traveling.domain.entity
+package com.bestswlkh0310.domain.entity
 
 import com.google.gson.annotations.SerializedName
 

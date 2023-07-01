@@ -8,7 +8,7 @@ import com.bestswlkh0310.presentation.util.Constant.MY_URL
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.google.gson.GsonBuilder
-import com.traveling.domain.repository.AuthRepository
+import com.bestswlkh0310.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -123,7 +123,6 @@ class AuthInterceptor @Inject constructor(
             Log.d(TAAG, "${res.code()}, ${res.body()} - intercept() called")
         } else if (response.code == 401) {
             response.close()
-//            showToast("다시 로그인 하세용")
             Log.d(TAAG, "액세스 토큰 이상해! - intercept() called")
         }
         return response
