@@ -19,7 +19,7 @@ class SignupBFragment: BaseFragment<FragmentSignupBBinding, SignupBViewModel>() 
 
     override fun observerViewModel() {
         with(viewModel) {
-            nickname.value = args.nickName
+            nickName.value = args.nickName
             pw.value = args.pw
             bjId.value = args.bjId
         }

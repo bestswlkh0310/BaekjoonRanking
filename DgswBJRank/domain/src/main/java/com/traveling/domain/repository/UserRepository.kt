@@ -1,10 +1,12 @@
 package com.traveling.domain.repository
 
-import com.traveling.domain.model.Grasses
-import com.traveling.domain.model.User
+import com.traveling.domain.entity.GrassesModel
+import com.traveling.domain.entity.UserModel
+import io.reactivex.Single
+import retrofit2.Response
 
 interface UserRepository {
-    suspend fun getToday(bjId: String): List<User>
-    suspend fun getGrasses(bjId: String): Grasses
-    suspend fun getAllGrasses(): List<Grasses>
+    fun getToday(bjId: String): Single<Response<List<UserModel>>>
+    fun getGrasses(bjId: String): Single<Response<GrassesModel>>
+    fun getAllGrasses(): Single<Response<List<GrassesModel>>>
 }

@@ -1,28 +1,13 @@
 package com.bestswlkh0310.data.repository
 
-import android.util.Log
-import com.bestswlkh0310.data.api.AuthApi
+import com.bestswlkh0310.data.remote.ApiClient
 import com.traveling.domain.repository.AuthRepository
-import com.traveling.domain.request.SigninRequest
-import com.traveling.domain.request.SignupRequest
-import com.traveling.domain.request.VerifyRequest
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
-    private val authApi: AuthApi
-): AuthRepository {
-    override suspend fun signupUser(
-        signupRequest: SignupRequest
-    ) = authApi.signupUser(signupRequest)
-
-    override suspend fun signinUser(
-        signinRequest: SigninRequest
-    ) = authApi.signinUser(signinRequest)
-
-    override suspend fun verify(
-        verifyRequest: VerifyRequest
-    ) {
-        Log.d("로그", "$verifyRequest - verify() called")
-        return authApi.verify(verifyRequest)
-    }
+class AuthRepositoryImpl @Inject constructor(private val apiClient: ApiClient): AuthRepository {
+    override fun signUpUser(body: Any?) = apiClient.signUp(body)
+    override fun signInUser(body: Any?) = apiClient.signIn(body)
+    override fun checkDuplicateBjId(bjId: String) = apiClient.checkDuplicateBjId(bjId)
+    override fun checkDuplicateNickName(nickName: String)  = apiClient.checkDuplicateNickName(nickName)
+    override fun getAccessToken(body: Any?) = apiClient.getAccessToken(body)
 }

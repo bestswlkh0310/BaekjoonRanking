@@ -1,7 +1,6 @@
 package com.bestswlkh0310.presentation.di
 
-import com.bestswlkh0310.data.api.AuthApi
-import com.bestswlkh0310.data.api.UserApi
+import com.bestswlkh0310.data.remote.ApiClient
 import com.bestswlkh0310.data.repository.AuthRepositoryImpl
 import com.bestswlkh0310.data.repository.UserRepositoryImpl
 import com.traveling.domain.repository.AuthRepository
@@ -18,11 +17,11 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(@MyRetrofit userApi: UserApi): UserRepository =
-        UserRepositoryImpl(userApi)
+    fun provideUserRepository(apiClient: ApiClient): UserRepository =
+        UserRepositoryImpl(apiClient)
 
     @Singleton
     @Provides
-    fun provideAuthRepository(@MyRetrofit authApi: AuthApi): AuthRepository =
-        AuthRepositoryImpl(authApi)
+    fun provideAuthRepository(apiClient: ApiClient): AuthRepository =
+        AuthRepositoryImpl(apiClient)
 }

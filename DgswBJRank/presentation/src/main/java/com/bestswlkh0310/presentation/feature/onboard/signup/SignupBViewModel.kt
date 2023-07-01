@@ -3,8 +3,7 @@ package com.bestswlkh0310.presentation.feature.onboard.signup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bestswlkh0310.presentation.base.BaseViewModel
-import com.traveling.domain.request.SignupRequest
-import com.traveling.domain.usecase.AuthUseCase
+import com.traveling.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,36 +12,32 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupBViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase
+    private val authRepository: AuthRepository
 ): BaseViewModel() {
     val intro = MutableLiveData<String>("")
     val goal = MutableLiveData<String>("")
 
-    val nickname = MutableLiveData<String>()
+    val nickName = MutableLiveData<String>()
     val pw = MutableLiveData<String>()
     val bjId = MutableLiveData<String>()
 
     fun onClickSignup() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                authUseCase.signupUser(
-                    SignupRequest(
-                        nickName = nickname.value!!,
-                        pw = pw.value!!,
-                        bjId = bjId.value!!,
-                        intro = intro.value!!,
-                        goal = goal.value!!
-                    )
-                )
-                withContext(Dispatchers.Main) {
-                    viewEvent(SIGN_UP)
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    viewEvent(CAN_NOT_SIGN_UP)
-                }
+        add(authRepository.signUpUser(
+            mapOf(
+                "nickName" to nickName.value!!,
+                "pw" to (pw.value)!!,
+                "bjId" to bjId.value!!,
+                "intro" to intro.value!!,
+                "goal" to goal.value!!
+            )
+        ).subscribe({ response ->
+            when (response.code()) {
+                200 -> viewEvent(SIGN_UP)
+                500 -> viewEvent(CAN_NOT_SIGN_UP)
             }
-        }
+        }, {
+            viewEvent(NETWORK_ERROR)
+        }))
     }
     companion object {
         const val SIGN_UP = 0

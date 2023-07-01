@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bestswlkh0310.presentation.databinding.ItemRankBinding
 import com.bestswlkh0310.presentation.util.Constant.TAAG
-import com.traveling.domain.model.Rank
+import com.traveling.domain.entity.Rank
 
 class RankAdapter(
     private val friendList: List<Rank>

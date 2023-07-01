@@ -1,4 +1,4 @@
-package com.traveling.domain.model
+package com.traveling.domain.entity
 
 data class Rank (
     val nickName: String?,

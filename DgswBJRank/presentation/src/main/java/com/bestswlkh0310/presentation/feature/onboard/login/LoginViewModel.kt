@@ -1,21 +1,17 @@
 package com.bestswlkh0310.presentation.feature.onboard.login
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.bestswlkh0310.presentation.base.BaseViewModel
-import com.traveling.domain.request.SigninRequest
-import com.traveling.domain.usecase.AuthUseCase
-import com.traveling.domain.usecase.UserUseCase
+import com.bestswlkh0310.presentation.util.DgswBJRankApplication
+import com.traveling.domain.repository.AuthRepository
+import com.traveling.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase,
-    private val userUseCase: UserUseCase
+    private val authRepository: AuthRepository,
+    private val userRepository: UserRepository
 ): BaseViewModel() {
 
     val nickName = MutableLiveData<String>("")
@@ -28,18 +24,23 @@ class LoginViewModel @Inject constructor(
         if (nickName.value!! == "" || pw.value!! == "") {
             viewEvent(CAN_NOT_LOGIN)
         } else {
-            viewModelScope.launch(Dispatchers.IO) {
-                try {
-                    authUseCase.signinUser(SigninRequest(nickName.value!!, pw.value!!))
-                    withContext(Dispatchers.Main) {
+            add(authRepository.signInUser(
+                mapOf(
+                    "nickName" to nickName.value,
+                    "pw" to pw.value
+                )
+            ).subscribe({ response ->
+                when (response.code()) {
+                    200 -> {
+                        val refreshToken = response.body()!!.refreshToken
+                        DgswBJRankApplication.prefs.refreshToken = refreshToken
                         viewEvent(LOGIN)
                     }
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        viewEvent(CAN_NOT_LOGIN)
-                    }
+                    500 -> viewEvent(CAN_NOT_LOGIN)
                 }
-            }
+            }, {
+                viewEvent(NETWORK_ERROR)
+            }))
         }
     }
 

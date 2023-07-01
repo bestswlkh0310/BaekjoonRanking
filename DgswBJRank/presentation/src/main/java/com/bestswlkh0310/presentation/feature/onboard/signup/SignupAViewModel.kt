@@ -3,21 +3,22 @@ package com.bestswlkh0310.presentation.feature.onboard.signup
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.traveling.domain.usecase.UserUseCase
 import com.bestswlkh0310.presentation.base.BaseViewModel
+import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
 import com.bestswlkh0310.presentation.util.Constant.TAAG
-import com.traveling.domain.request.VerifyRequest
-import com.traveling.domain.usecase.AuthUseCase
+import com.traveling.domain.repository.AuthRepository
+import com.traveling.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
 class SignupAViewModel @Inject constructor(
-    private val userUseCase: UserUseCase,
-    private val authUseCase: AuthUseCase
+    private val userRepository: UserRepository,
+    private val authRepository: AuthRepository
 ): BaseViewModel() {
     val nickName = MutableLiveData<String>("")
     val nickNameState = MutableLiveData<Boolean>(false)
@@ -32,38 +33,37 @@ class SignupAViewModel @Inject constructor(
     val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickNext() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                authUseCase.verify(VerifyRequest(bjId.value!!))
-                withContext(Dispatchers.Main) {
+        add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
+            when (response.code()) {
+                200 -> {
                     viewEvent(FOUND_BJ_ID)
+                    bjIdCheckState.value = true
                 }
-                bjIdCheckState.postValue(true)
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
+                204 -> {
                     viewEvent(NOT_FOUND_BJ_ID)
+                    bjIdCheckState.value = false
                 }
-                bjIdCheckState.postValue(false)
             }
-        }
+        }, {
+            viewEvent(NETWORK_ERROR)
+        }))
     }
 
     fun onClickCheck() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                Log.d(TAAG, "${bjId.value} - onClickCheck() called")
-                authUseCase.verify(VerifyRequest(bjId.value!!))
-                Log.d(TAAG, "success - onClickCheck() called")
-                bjIdCheckState.postValue(true)
-                bjIdDetail.postValue("그런 아이디는 있네요")
-            } catch (e: Exception) {
-                Log.d(TAAG, "$e - onClickCheck() called")
-                withContext(Dispatchers.Main) {
-                    viewEvent(NOT_FOUND_BJ_ID)
+        add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
+            when (response.code()) {
+                200 -> {
+                    bjIdCheckState.postValue(true)
+                    bjIdDetail.postValue("그런 아이디는 있네요")
                 }
-                bjIdCheckState.postValue(false)
+                204 -> {
+                    viewEvent(NOT_FOUND_BJ_ID)
+                    bjIdCheckState.postValue(false)
+                }
             }
-        }
+        }, {
+            viewEvent(NETWORK_ERROR)
+        }))
     }
 
     companion object {

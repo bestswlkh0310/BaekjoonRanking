@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.BR
+import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
@@ -50,10 +52,12 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
     }
 
     protected fun bindingViewEvent(action: (event: Any) -> Unit) {
-        if (!isLoad) {
-            isLoad = true
-            viewModel.viewEvent.observe(this) { event ->
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { event ->
                 action.invoke(event)
+                when (event) {
+                    NETWORK_ERROR -> showToast("네트워크 에러")
+                }
             }
         }
     }
@@ -90,6 +94,10 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
         }
 
         return 0
+    }
+
+    fun showToast(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

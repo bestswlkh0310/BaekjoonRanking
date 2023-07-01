@@ -5,5 +5,12 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class DgswBJRankApplication: Application() {
+    companion object {
+        lateinit var prefs: PreferenceManager
+    }
 
+    override fun onCreate() {
+        super.onCreate()
+        prefs = PreferenceManager(applicationContext)
+    }
 }
