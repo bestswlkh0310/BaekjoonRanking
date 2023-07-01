@@ -1,11 +1,11 @@
 package com.traveling.domain.entity
 
-data class Rank (
+data class RankModel (
     val nickName: String?,
     val date: Int,
     val value: Int
-): Comparable<Rank> {
-    override fun compareTo(other: Rank): Int {
+): Comparable<RankModel> {
+    override fun compareTo(other: RankModel): Int {
         return value.compareTo(other.value)
     }
 }

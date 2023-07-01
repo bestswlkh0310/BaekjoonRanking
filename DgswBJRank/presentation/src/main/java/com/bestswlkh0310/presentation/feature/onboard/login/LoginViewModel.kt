@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
+import com.bestswlkh0310.presentation.util.Security
 import com.traveling.domain.repository.AuthRepository
 import com.traveling.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,7 @@ class LoginViewModel @Inject constructor(
             add(authRepository.signInUser(
                 mapOf(
                     "nickName" to nickName.value,
-                    "pw" to pw.value
+                    "pw" to Security.hashPassword(pw.value!!)
                 )
             ).subscribe({ response ->
                 when (response.code()) {
@@ -40,7 +41,7 @@ class LoginViewModel @Inject constructor(
                         DgswBJRankApplication.prefs.accessToken = accessToken
                         viewEvent(LOGIN)
                     }
-                    500 -> viewEvent(CAN_NOT_LOGIN)
+                    204 -> viewEvent(CAN_NOT_LOGIN)
                 }
             }, {
                 viewEvent(NETWORK_ERROR)

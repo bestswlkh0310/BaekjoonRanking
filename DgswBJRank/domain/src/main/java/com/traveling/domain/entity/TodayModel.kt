@@ -1,6 +1,6 @@
 package com.traveling.domain.entity
 
-data class UserModel (
+data class TodayModel (
     val date: Int,
     val value: Int
 )

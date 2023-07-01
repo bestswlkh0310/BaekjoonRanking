@@ -2,17 +2,12 @@ package com.bestswlkh0310.presentation.feature.main.rank
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
-import com.bestswlkh0310.presentation.util.DgswBJRankApplication
-import com.traveling.domain.entity.Rank
+import com.traveling.domain.entity.RankModel
 import com.traveling.domain.repository.AuthRepository
 import com.traveling.domain.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -24,7 +19,7 @@ class RankViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): BaseViewModel() {
 
-    val rankList = MutableLiveData<MutableList<Rank>>(arrayListOf())
+    val rankList = MutableLiveData<MutableList<RankModel>>(arrayListOf())
 
     fun reload() {
         rankList.value!!.clear()
@@ -35,7 +30,7 @@ class RankViewModel @Inject constructor(
             when (response.code()) {
                 200 -> {
                     val grasses = response.body()
-                    val rankData = mutableListOf<Rank>()
+                    val rankData = mutableListOf<RankModel>()
                     grasses!!.map {
                         val today = it.grasses.first()
                         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
@@ -43,7 +38,7 @@ class RankViewModel @Inject constructor(
                         val realToday = dateFormat.format(currentDate)
                         Log.d(TAAG, "$realToday, ${today.date} - getAllToday() called")
                         val resultValue = if (realToday == today.date.toString()) today.value else 0
-                        rankData.add(Rank(
+                        rankData.add(RankModel(
                             it.nickName,
                             today.date,
                             resultValue

@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.BR
 import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
-import com.bestswlkh0310.presentation.feature.main.MainActivity
 import com.bestswlkh0310.presentation.feature.onboard.OnBoardActivity
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
@@ -41,12 +39,13 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
             layoutRes(),
             container, false
         )
-        performDataBinding()
-        if (!isLoad2) {
-            isLoad2 = true
-            observerViewModel()
-        }
         return mBinding.root
+    }
+    
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        performDataBinding()
+        observerViewModel()
     }
 
     private fun performDataBinding() {

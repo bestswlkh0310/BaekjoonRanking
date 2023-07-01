@@ -14,11 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OnBoardActivity: BaseActivity<ActivityOnBoardBinding, OnBoardViewModel>() {
     override val viewModel: OnBoardViewModel by viewModels()
 
-    override fun observerViewModel() {
-
-        Log.d(Constant.TAAG, "ㅅㅂ  - onCreate() called")
-        DgswBJRankApplication.prefs.delToken()
-    }
+    override fun observerViewModel() {}
 
     fun startMainActivity() {
         val intent = Intent(applicationContext, MainActivity::class.java)

@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bestswlkh0310.presentation.databinding.ItemRankBinding
 import com.bestswlkh0310.presentation.util.Constant.TAAG
-import com.traveling.domain.entity.Rank
+import com.traveling.domain.entity.RankModel
 
 class RankAdapter(
-    private val friendList: List<Rank>
+    private val friendList: List<RankModel>
 ): RecyclerView.Adapter<RankAdapter.ViewHolder>() {
     inner class ViewHolder(binding: ItemRankBinding): RecyclerView.ViewHolder(binding.root) {
         val rank = binding.rank

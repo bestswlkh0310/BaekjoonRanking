@@ -3,6 +3,7 @@ package com.bestswlkh0310.presentation.feature.onboard.signup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.bestswlkh0310.presentation.base.BaseViewModel
+import com.bestswlkh0310.presentation.util.Security
 import com.traveling.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +26,7 @@ class SignupBViewModel @Inject constructor(
         add(authRepository.signUpUser(
             mapOf(
                 "nickName" to nickName.value!!,
-                "pw" to (pw.value)!!,
+                "pw" to (Security.hashPassword(pw.value!!)),
                 "bjId" to bjId.value!!,
                 "intro" to intro.value!!,
                 "goal" to goal.value!!
@@ -33,7 +34,7 @@ class SignupBViewModel @Inject constructor(
         ).subscribe({ response ->
             when (response.code()) {
                 200 -> viewEvent(SIGN_UP)
-                500 -> viewEvent(CAN_NOT_SIGN_UP)
+                204 -> viewEvent(CAN_NOT_SIGN_UP)
             }
         }, {
             viewEvent(NETWORK_ERROR)

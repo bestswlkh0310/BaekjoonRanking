@@ -2,7 +2,7 @@ package com.bestswlkh0310.data.remote
 
 import com.traveling.domain.entity.AuthModel
 import com.traveling.domain.entity.GrassesModel
-import com.traveling.domain.entity.UserModel
+import com.traveling.domain.entity.TodayModel
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.Body
@@ -36,7 +36,7 @@ interface API {
      */
 
     @GET("/api/v1/grass/today")
-    fun getToday(@Query("bjId") bjId: String): Single<Response<List<UserModel>>>
+    fun getToday(@Query("bjId") bjId: String): Single<Response<List<TodayModel>>>
 
     @GET("/api/v1/grass/grasses")
     fun getGrasses(@Query("bjId") bjId: String): Single<Response<GrassesModel>>
