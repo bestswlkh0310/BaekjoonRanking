@@ -1,6 +1,7 @@
 package com.bestswlkh0310.presentation.feature.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -8,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.base.BaseActivity
 import com.bestswlkh0310.presentation.databinding.ActivityMainBinding
+import com.bestswlkh0310.presentation.util.Constant.TAAG
+import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

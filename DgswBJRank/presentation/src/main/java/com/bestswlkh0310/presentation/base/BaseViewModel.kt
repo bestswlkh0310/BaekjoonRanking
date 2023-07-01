@@ -31,3 +31,4 @@ open class BaseViewModel : ViewModel() {
         const val NETWORK_ERROR = -1
     }
 }
+

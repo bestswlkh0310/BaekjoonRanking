@@ -1,17 +1,21 @@
 package com.bestswlkh0310.presentation.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.BR
 import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
+import com.bestswlkh0310.presentation.feature.main.MainActivity
+import com.bestswlkh0310.presentation.feature.onboard.OnBoardActivity
 import java.lang.reflect.ParameterizedType
 import java.util.Locale
 import java.util.Objects
@@ -56,7 +60,13 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
             it.getContentIfNotHandled()?.let { event ->
                 action.invoke(event)
                 when (event) {
-                    NETWORK_ERROR -> showToast("네트워크 에러")
+                    NETWORK_ERROR -> {
+                        requireActivity().finish()
+                        val intent = Intent(context, OnBoardActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finishAffinity()
+                        showToast("토큰이 만료되었어요")
+                    }
                 }
             }
         }

@@ -1,7 +1,9 @@
 package com.bestswlkh0310.presentation.feature.onboard.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
+import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.traveling.domain.repository.AuthRepository
 import com.traveling.domain.repository.UserRepository
@@ -33,7 +35,9 @@ class LoginViewModel @Inject constructor(
                 when (response.code()) {
                     200 -> {
                         val refreshToken = response.body()!!.refreshToken
+                        val accessToken = response.body()!!.token
                         DgswBJRankApplication.prefs.refreshToken = refreshToken
+                        DgswBJRankApplication.prefs.accessToken = accessToken
                         viewEvent(LOGIN)
                     }
                     500 -> viewEvent(CAN_NOT_LOGIN)

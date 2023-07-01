@@ -15,6 +15,10 @@ class PreferenceManager(context: Context) {
         get() = prefs.getString(ACCESS_TOKEN, "").toString()
         set(value) = prefs.edit().putString(ACCESS_TOKEN, value).apply()
 
+    fun delToken() {
+        accessToken = ""
+        refreshToken = ""
+    }
     companion object {
         const val MARU_APP = "MARU_APP"
 

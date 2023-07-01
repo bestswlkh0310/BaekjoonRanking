@@ -2,7 +2,6 @@ package com.bestswlkh0310.presentation.di
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.bestswlkh0310.data.remote.API
 import com.bestswlkh0310.data.remote.ApiClient
 import com.bestswlkh0310.presentation.util.Constant.MY_URL
@@ -83,8 +82,9 @@ object NetworkModule {
     @Singleton
     fun provideHeaderInterceptor() = Interceptor { chain ->
         with(chain) {
+            Log.d(TAAG, "${DgswBJRankApplication.prefs.accessToken} - provideHeaderInterceptor() called")
             val newRequest = request().newBuilder()
-                .addHeader("Authorization", "Bearer ${DgswBJRankApplication.prefs.accessToken}")
+                .addHeader("authorization", "Bearer ${DgswBJRankApplication.prefs.accessToken}")
                 .build()
             proceed(newRequest)
         }
@@ -99,37 +99,37 @@ class AuthInterceptor @Inject constructor(
         val request = chain.request()
 
         if (request.url.encodedPath.startsWith("/api/v1/sign/")) {
-            Log.d(TAAG, "to sign path - intercept() called")
             return chain.proceed(request)
         }
 
         val response = chain.proceed(request)
-        Log.d(TAAG, "path: ${request.url.encodedPath}, code: ${response.code}- intercept() called")
+        Log.d(TAAG, "code: ${response.code}- intercept() called")
 
         if (response.code == 403) {
             response.close()
+            Log.d(TAAG, "access 토큰 만료 - ${DgswBJRankApplication.prefs.refreshToken}() called")
+            val res = authRepository.get().getAccessToken(mapOf("refreshToken" to DgswBJRankApplication.prefs.refreshToken)).blockingGet()
+            when (res.code()) {
+                200 -> {
+                    Log.d(TAAG, "새로운 토큰 - ${res.body()!!.token}")
+                    DgswBJRankApplication.prefs.accessToken = res.body()!!.token
+                    val newRequest = request.newBuilder()
+                        .header("Authorization", "Bearer ${res.body()!!.token}")
+                        .build()
+                    return chain.proceed(newRequest)
+                }
+            }
 
-            Log.d(TAAG, "access 토큰 만료 - intercept() called")
-            val d = authRepository.get().getAccessToken("refreshToken" to DgswBJRankApplication.prefs.refreshToken)
-                .subscribe({ response ->
-                    when (response.code()) {
-                        200 -> {
-                            DgswBJRankApplication.prefs.accessToken = response.body()!!.token
-                            chain.proceed(request)
-                        }
-                    }
-                }, {})
-            d.dispose()
+            Log.d(TAAG, "${res.code()}, ${res.body()} - intercept() called")
         } else if (response.code == 401) {
             response.close()
-
-            showToast("다시 로그인 하세용")
+//            showToast("다시 로그인 하세용")
+            Log.d(TAAG, "액세스 토큰 이상해! - intercept() called")
         }
-
         return response
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
