@@ -1,5 +1,6 @@
 package com.bestswlkh0310.presentation.feature.onboard.signup
 
+import android.app.ProgressDialog.show
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -26,7 +27,7 @@ class SignupBFragment: BaseFragment<FragmentSignupBBinding, SignupBViewModel>() 
         bindingViewEvent { event ->
             when (event) {
                 SIGN_UP -> findNavController().popBackStack(R.id.startFragment, false)
-                CAN_NOT_SIGN_UP -> Toast.makeText(activity, "해당 백준 아이디혹은 닉네임으로 가입된 계정이 이미 있습니다", Toast.LENGTH_SHORT).show()
+                CAN_NOT_SIGN_UP -> showToast("해당 백준 아이디혹은 닉네임으로 가입된 계정이 이미 있습니다")
             }
         }
     }

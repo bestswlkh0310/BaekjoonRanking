@@ -92,7 +92,6 @@ object NetworkModule {
 }
 
 class AuthInterceptor @Inject constructor(
-    private val context: Context,
     private val authRepository: Provider<AuthRepository>
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -126,9 +125,5 @@ class AuthInterceptor @Inject constructor(
             Log.d(TAAG, "액세스 토큰 이상해! - intercept() called")
         }
         return response
-    }
-
-    private fun showToast(message: String) {
-//        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

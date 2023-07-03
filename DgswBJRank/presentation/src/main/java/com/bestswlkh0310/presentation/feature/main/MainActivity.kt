@@ -28,6 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.
+//        viewModel.
     }
 }

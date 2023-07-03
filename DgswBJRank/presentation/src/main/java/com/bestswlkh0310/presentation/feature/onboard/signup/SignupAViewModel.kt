@@ -5,6 +5,7 @@ import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUsernameValid
 import com.bestswlkh0310.domain.repository.AuthRepository
+import com.bestswlkh0310.presentation.feature.onboard.login.LoginViewModel.Companion.WRONG_INPUT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -33,12 +34,8 @@ class SignupAViewModel @Inject constructor(
         } else {
             add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
                 when (response.code()) {
-                    200 -> {
-                        viewEvent(FOUND_BJ_ID)
-                    }
-                    204 -> {
-                        viewEvent(NOT_FOUND_BJ_ID)
-                    }
+                    200 -> viewEvent(FOUND_BJ_ID)
+                    404 -> viewEvent(NOT_FOUND_BJ_ID)
                 }
             }, {
                 viewEvent(NETWORK_ERROR)
@@ -50,7 +47,7 @@ class SignupAViewModel @Inject constructor(
         add(authRepository.checkDuplicateBjId(bjId.value!!).subscribe({ response ->
             when (response.code()) {
                 200 -> bjIdDetail.value = "그런 아이디는 있네요"
-                204 -> viewEvent(NOT_FOUND_BJ_ID)
+                404 -> viewEvent(NOT_FOUND_BJ_ID)
             }
         }, {
             viewEvent(NETWORK_ERROR)

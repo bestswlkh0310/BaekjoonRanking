@@ -1,5 +1,6 @@
 package com.bestswlkh0310.presentation.feature.onboard.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
@@ -8,6 +9,7 @@ import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUsernameValid
 import com.bestswlkh0310.domain.repository.AuthRepository
 import com.bestswlkh0310.domain.repository.UserRepository
+import com.bestswlkh0310.presentation.util.Constant.TAAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -27,7 +29,7 @@ class LoginViewModel @Inject constructor(
         if (nickName.value!! == "" || pw.value!! == "") {
             viewEvent(WRONG_INPUT)
         } else if (!isPasswordValid(pw.value!!) || !isUsernameValid(nickName.value!!)) {
-            viewEvent(CAN_NOT_LOGIN)
+            viewEvent(NOT_FOUND_USER)
         } else {
             add(authRepository.signInUser(
                 mapOf(
@@ -39,6 +41,7 @@ class LoginViewModel @Inject constructor(
                     200 -> {
                         val refreshToken = response.body()!!.refreshToken
                         val accessToken = response.body()!!.token
+                        Log.d(TAAG, "$refreshToken\n$accessToken - onClickLogin() called")
                         with(DgswBJRankApplication) {
                             prefs.refreshToken = refreshToken
                             prefs.accessToken = accessToken
@@ -46,7 +49,7 @@ class LoginViewModel @Inject constructor(
                         }
                         viewEvent(LOGIN)
                     }
-                    204 -> viewEvent(CAN_NOT_LOGIN)
+                    404 -> viewEvent(NOT_FOUND_USER)
                 }
             }, {
                 viewEvent(NETWORK_ERROR)
@@ -56,7 +59,7 @@ class LoginViewModel @Inject constructor(
 
     companion object {
         const val LOGIN = 0
-        const val CAN_NOT_LOGIN = 1
+        const val NOT_FOUND_USER = 1
         const val WRONG_INPUT = 3
     }
 }

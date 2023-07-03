@@ -29,6 +29,7 @@ class RankViewModel @Inject constructor(
         add(userRepository.getAllGrasses().subscribe({ response ->
             when (response.code()) {
                 200 -> {
+                    Log.d(TAAG, "success입니당 - getAllToday() called")
                     val grasses = response.body()
                     val rankData = mutableListOf<RankModel>()
                     grasses!!.map {
@@ -52,9 +53,9 @@ class RankViewModel @Inject constructor(
                     rankList.value!!.addAll(rankData.sortedWith(compareBy { it.value }).reversed())
                     viewEvent(ADD_ALL_RANK)
                 }
+                else -> Log.d(TAAG, "qwertyuio - getAllToday() called")
             }
         }) {
-            Log.d(TAAG, "${it.message} - getAllToday() called")
             viewEvent(NETWORK_ERROR)
         })
     }
