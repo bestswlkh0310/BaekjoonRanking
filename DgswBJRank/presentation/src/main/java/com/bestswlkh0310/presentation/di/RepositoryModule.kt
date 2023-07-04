@@ -1,6 +1,7 @@
 package com.bestswlkh0310.presentation.di
 
-import com.bestswlkh0310.data.remote.ApiClient
+import com.bestswlkh0310.data.remote.CAuthApiClient
+import com.bestswlkh0310.data.remote.CRankApiClient
 import com.bestswlkh0310.data.repository.AuthRepositoryImpl
 import com.bestswlkh0310.data.repository.UserRepositoryImpl
 import com.bestswlkh0310.domain.repository.AuthRepository
@@ -17,11 +18,11 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(apiClient: ApiClient): UserRepository =
+    fun provideUserRepository(apiClient: CRankApiClient): UserRepository =
         UserRepositoryImpl(apiClient)
 
     @Singleton
     @Provides
-    fun provideAuthRepository(apiClient: ApiClient): AuthRepository =
+    fun provideAuthRepository(apiClient: CAuthApiClient): AuthRepository =
         AuthRepositoryImpl(apiClient)
 }

@@ -1,14 +1,16 @@
 package com.bestswlkh0310.presentation.di
 
-import android.content.Context
 import android.util.Log
-import com.bestswlkh0310.data.remote.API
-import com.bestswlkh0310.data.remote.ApiClient
-import com.bestswlkh0310.presentation.util.Constant.MY_URL
+import com.bestswlkh0310.data.remote.CAuthAPI
+import com.bestswlkh0310.data.remote.CAuthApiClient
+import com.bestswlkh0310.data.remote.CRankAPI
+import com.bestswlkh0310.data.remote.CRankApiClient
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.google.gson.GsonBuilder
 import com.bestswlkh0310.domain.repository.AuthRepository
+import com.bestswlkh0310.presentation.util.Constant.AUTH_URL
+import com.bestswlkh0310.presentation.util.Constant.RANK_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,9 +24,26 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Provider
+import javax.inject.Qualifier
 import javax.inject.Singleton
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CAuthOkHttpClient
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CRankOkHttpClient
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CAuthRemoteRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CRankRemoteRetrofit
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,15 +51,48 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideApi(@Named("retrofit") retrofit: Retrofit): API = retrofit.create(API::class.java)
+    fun provideCAuthApiClient(api: CAuthAPI) = CAuthApiClient(api)
 
     @Singleton
     @Provides
-    fun provideApiClient(api: API) = ApiClient(api)
+    fun provideCRankApiClient(api: CRankAPI) = CRankApiClient(api)
 
     @Singleton
     @Provides
-    fun provideMyOkHttpClient(
+    fun provideCAuthApi(@CAuthRemoteRetrofit retrofit: Retrofit): CAuthAPI = retrofit.create(CAuthAPI::class.java)
+
+    @Singleton
+    @Provides
+    fun provideCRankApi(@CRankRemoteRetrofit retrofit: Retrofit): CRankAPI = retrofit.create(CRankAPI::class.java)
+
+    @Singleton
+    @Provides
+    @CAuthRemoteRetrofit
+    fun provideCAuthRetrofit(@CAuthOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(AUTH_URL)
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    @CRankRemoteRetrofit
+    fun provideCRankRetrofit(@CRankOkHttpClient okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(RANK_URL)
+            .client(okHttpClient)
+            .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    @CAuthOkHttpClient
+    fun provideCAuthOkHttpClient(
         headerInterceptor: Interceptor,
         loggerInterceptor: HttpLoggingInterceptor,
         authInterceptor: AuthInterceptor
@@ -58,14 +110,21 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("retrofit")
-    fun provideRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(MY_URL)
-            .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+    @CRankOkHttpClient
+    fun provideCRankOkHttpClient(
+        headerInterceptor: Interceptor,
+        loggerInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor
+    ): OkHttpClient {
+        val okHttpClientBuilder = OkHttpClient().newBuilder()
+        okHttpClientBuilder.connectTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.readTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.writeTimeout(60, TimeUnit.SECONDS)
+        okHttpClientBuilder.addInterceptor(loggerInterceptor)
+        okHttpClientBuilder.addInterceptor(headerInterceptor)
+        okHttpClientBuilder.addInterceptor(authInterceptor)
+
+        return okHttpClientBuilder.build()
     }
 
     @Singleton
@@ -118,7 +177,7 @@ class AuthInterceptor @Inject constructor(
                     return chain.proceed(newRequest)
                 }
             }
-
+            
             Log.d(TAAG, "${res.code()}, ${res.body()} - intercept() called")
         } else if (response.code == 401) {
             response.close()

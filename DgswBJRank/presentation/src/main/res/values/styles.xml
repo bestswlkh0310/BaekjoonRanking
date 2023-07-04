@@ -23,6 +23,11 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="grayText">
+        <item name="android:textColor">@color/gray150</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <style name="buttonStyle" parent="Widget.AppCompat.Button.Borderless">
         <item name="android:height">57dp</item>
         <item name="android:textSize">16sp</item>

@@ -1,6 +1,5 @@
 package com.bestswlkh0310.data.remote
 
-import com.bestswlkh0310.domain.entity.AuthModel
 import com.bestswlkh0310.domain.entity.FriendRequest
 import com.bestswlkh0310.domain.entity.GrassesModel
 import com.bestswlkh0310.domain.entity.TodayModel
@@ -13,38 +12,18 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
-import retrofit2.http.Query
 
-interface API {
-
-    /**
-     * auth
-     */
-
-    @POST("/api/v1/sign/up")
-    fun signUpUser(@Body body: Any?): Single<Response<Unit>>
-
-    @POST("/api/v1/sign/in")
-    fun signInUser(@Body body: Any?): Single<Response<AuthModel>>
-
-    @POST("/api/v1/sign/check-duplicate-bjId")
-    fun checkDuplicateBjId(@Query("bjId") bjId: String): Single<Response<Unit>>
-
-    @POST("/api/v1/sign/check-duplicate-nickName")
-    fun checkDuplicateNickName(@Query("nickName") nickName: String): Single<Response<Unit>>
-
-    @POST("/api/v1/sign/access-token")
-    fun getAccessToken(@Body body: Any?): Single<Response<AuthModel>>
+interface CRankAPI {
 
     /**
      * grasses
      */
 
-    @GET("/api/v1/grass/today")
-    fun getToday(@Query("bjId") bjId: String): Single<Response<List<TodayModel>>>
+    @GET("/api/v1/grass/today/{bjId}")
+    fun getToday(@Path("bjId") bjId: String): Single<Response<List<TodayModel>>>
 
-    @GET("/api/v1/grass/grasses")
-    fun getGrasses(@Query("bjId") bjId: String): Single<Response<GrassesModel>>
+    @GET("/api/v1/grass/grasses/{bjId}")
+    fun getGrasses(@Path("bjId") bjId: String): Single<Response<GrassesModel>>
 
     @GET("/api/v1/grass/all-grasses")
     fun getAllGrasses(): Single<Response<List<GrassesModel>>>

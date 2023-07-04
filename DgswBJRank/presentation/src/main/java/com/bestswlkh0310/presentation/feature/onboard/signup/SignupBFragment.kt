@@ -1,7 +1,5 @@
 package com.bestswlkh0310.presentation.feature.onboard.signup
 
-import android.app.ProgressDialog.show
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs

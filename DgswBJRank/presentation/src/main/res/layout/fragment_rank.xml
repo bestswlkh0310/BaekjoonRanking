@@ -21,8 +21,57 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="21dp"
-            android:text="Solve 랭킹"
+            android:text="백준 랭킹"
             style="@style/whiteTitle"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toTopOf="@id/rank"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="14dp"
+                    style="@style/blackTitle"
+                    android:text="시즌1" />
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/season"
+                    style="@style/grayText"
+                    android:text="2/1 ~ 2/33"/>
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="40dp"
+                    style="@style/blackText"
+                    android:text="대소고 전체"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rank"
             android:layout_width="match_parent"
@@ -41,25 +90,29 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@drawable/btn_today"
+                android:onClick="@{() -> vm.getAllToday()}"
                 android:text="오늘"
                 style="@style/blackText"/>
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/week"
                 android:layout_width="70dp"
                 android:layout_height="48dp"
+                android:onClick="@{() -> vm.getAllSeason()}"
                 app:layout_constraintTop_toTopOf="@id/today"
                 app:layout_constraintBottom_toBottomOf="@id/today"
                 app:layout_constraintStart_toEndOf="@id/today"
                 android:background="@drawable/btn_week"
-                android:text="주간"
+                android:text="시즌"
                 style="@style/blackText"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_rank"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:paddingBottom="73dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"
-                app:layout_constraintTop_toBottomOf="@id/today"/>
+                app:layout_constraintTop_toBottomOf="@id/today"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
