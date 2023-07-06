@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1018177332847",
+    "project_id": "dgswrank",
+    "storage_bucket": "dgswrank.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018177332847:android:87a4a55c606c833140cf9a",
+        "android_client_info": {
+          "package_name": "com.bestswlkh0310.presentation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018177332847-6fbnb4l04hf55mgai1jslk6glckvrvg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSFuza256A33e57KUnpdvQ-AOrvqOQJ7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018177332847-6fbnb4l04hf55mgai1jslk6glckvrvg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

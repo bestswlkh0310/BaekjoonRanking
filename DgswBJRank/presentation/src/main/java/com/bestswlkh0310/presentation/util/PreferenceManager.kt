@@ -10,6 +10,7 @@ class PreferenceManager(context: Context) {
     var refreshToken: String by PreferenceDelegate(REFRESH_TOKEN, "")
     var accessToken: String by PreferenceDelegate(ACCESS_TOKEN, "")
     var isAuthToken: Boolean by PreferenceDelegate(IS_AUTH_TOKEN, false)
+    var alarmToken: String by PreferenceDelegate(ALARM_TOKEN, "")
 
     fun delToken() {
         accessToken = ""
@@ -22,7 +23,7 @@ class PreferenceManager(context: Context) {
         const val REFRESH_TOKEN = "REFRESH_TOKEN"
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val IS_AUTH_TOKEN = "IS_AUTH_TOKEN"
-        const val COUNT = "COUNT"
+        const val ALARM_TOKEN = "ALARM_TOKEN"
     }
 
     private inner class PreferenceDelegate<T>(

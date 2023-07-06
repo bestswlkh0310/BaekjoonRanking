@@ -4,6 +4,7 @@ plugins {
     id ("androidx.navigation.safeargs.kotlin")
     id ("com.google.dagger.hilt.android")
     id ("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -67,6 +68,12 @@ dependencies {
     implementation("com.trello.rxlifecycle2:rxlifecycle-android:2.1.0")
     implementation("com.trello.rxlifecycle2:rxlifecycle-components:2.1.0")
 
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
+
+
+    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-messaging:23.1.2")
 
     implementation ("androidx.core:core-ktx:1.10.1")
     implementation ("androidx.activity:activity-ktx:1.7.2")

@@ -7,5 +7,6 @@ data class UserModel (
     @SerializedName("nickName") val nickName: String,
     @SerializedName("bjId") val pw: String,
     @SerializedName("intro") val intro: String,
-    @SerializedName("goal") val goal: String
+    @SerializedName("goal") val goal: String,
+    @SerializedName("alarmToken") val alarmToken: String?
 )

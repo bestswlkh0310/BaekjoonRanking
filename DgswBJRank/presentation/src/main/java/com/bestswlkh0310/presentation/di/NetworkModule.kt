@@ -44,7 +44,6 @@ annotation class CAuthRemoteRetrofit
 @Retention(AnnotationRetention.BINARY)
 annotation class CRankRemoteRetrofit
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {

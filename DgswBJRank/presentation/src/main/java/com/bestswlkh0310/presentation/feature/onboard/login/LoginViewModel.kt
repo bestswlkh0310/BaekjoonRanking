@@ -9,7 +9,9 @@ import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUsernameValid
 import com.bestswlkh0310.domain.repository.AuthRepository
 import com.bestswlkh0310.domain.repository.UserRepository
+import com.bestswlkh0310.presentation.feature.onboard.signup.SignupAViewModel.Companion.WRONG_INPUT
 import com.bestswlkh0310.presentation.util.Constant.TAAG
+import com.google.firebase.analytics.FirebaseAnalytics.Event.LOGIN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -34,7 +36,7 @@ class LoginViewModel @Inject constructor(
             add(authRepository.signInUser(
                 mapOf(
                     "nickName" to nickName.value,
-                    "pw" to Security.hashPassword(pw.value!!)
+                    "pw" to Security.hashPassword(pw.value!!),
                 )
             ).subscribe({ response ->
                 when (response.code()) {
@@ -47,7 +49,7 @@ class LoginViewModel @Inject constructor(
                             prefs.accessToken = accessToken
                             prefs.isAuthToken = true
                         }
-                        viewEvent(LOGIN)
+                        viewEvent(CHECK_ALARM_PERMISSION)
                     }
                     404 -> viewEvent(NOT_FOUND_USER)
                 }
@@ -57,9 +59,13 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun updateAlarmToken() {
+        // TODO: update Alarm Token to Server
+    }
+
     companion object {
-        const val LOGIN = 0
         const val NOT_FOUND_USER = 1
         const val WRONG_INPUT = 3
+        const val CHECK_ALARM_PERMISSION = 4
     }
 }
