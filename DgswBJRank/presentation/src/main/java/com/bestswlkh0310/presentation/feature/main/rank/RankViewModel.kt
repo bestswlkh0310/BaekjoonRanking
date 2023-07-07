@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.domain.dto.RankModel
 import com.bestswlkh0310.domain.repository.AuthRepository
-import com.bestswlkh0310.domain.repository.UserRepository
+import com.bestswlkh0310.domain.repository.GrassesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RankViewModel @Inject constructor(
-    private val userRepository: UserRepository,
+    private val userRepository: GrassesRepository,
     private val authRepository: AuthRepository
 ): BaseViewModel() {
 

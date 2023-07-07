@@ -1,6 +1,5 @@
 package com.bestswlkh0310.data.remote
 
-import com.bestswlkh0310.domain.entity.AuthModel
 import com.bestswlkh0310.domain.entity.GrassesModel
 import com.bestswlkh0310.domain.entity.TodayModel
 import io.reactivex.Single
@@ -22,6 +21,11 @@ class CRankApiClient constructor(val api: CRankAPI) {
 
     fun getAllGrasses(): Single<Response<List<GrassesModel>>> =
         api.getAllGrasses()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun updateAlarmToken(body: Any?): Single<Response<Unit>> =
+        api.updateAlarmToken(body)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

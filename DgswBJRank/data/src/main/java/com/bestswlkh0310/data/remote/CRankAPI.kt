@@ -1,5 +1,6 @@
 package com.bestswlkh0310.data.remote
 
+import com.bestswlkh0310.data.Constants.BASE_ROUTER
 import com.bestswlkh0310.domain.entity.FriendRequest
 import com.bestswlkh0310.domain.entity.GrassesModel
 import com.bestswlkh0310.domain.entity.TodayModel
@@ -19,39 +20,46 @@ interface CRankAPI {
      * grasses
      */
 
-    @GET("/api/v1/grass/today/{bjId}")
+    @GET("${BASE_ROUTER}/grass/today/{bjId}")
     fun getToday(@Path("bjId") bjId: String): Single<Response<List<TodayModel>>>
 
-    @GET("/api/v1/grass/grasses/{bjId}")
+    @GET("${BASE_ROUTER}/grass/grasses/{bjId}")
     fun getGrasses(@Path("bjId") bjId: String): Single<Response<GrassesModel>>
 
-    @GET("/api/v1/grass/all-grasses")
+    @GET("${BASE_ROUTER}/grass/all-grasses")
     fun getAllGrasses(): Single<Response<List<GrassesModel>>>
+
+    /**
+     * user
+     */
+    @POST("${BASE_ROUTER}/user/new-alarmToken")
+    fun updateAlarmToken(@Body body: Any?): Single<Response<Unit>>
+
 
     /**
      * friend
      */
-    @POST("/api/v1/friend/request")
+    @POST("${BASE_ROUTER}/friend/request")
     fun sendFriendRequest(@Body body: Any?): Single<Response<Unit>>
 
-    @POST("/api/v1/friend/request/accept")
+    @POST("${BASE_ROUTER}/friend/request/accept")
     fun acceptFriendRequest(@Body body: Any?): Single<Response<Unit>>
 
-    @PUT("/api/v1/friend/request/{requestId}")
+    @PUT("${BASE_ROUTER}/friend/request/{requestId}")
     fun deleteFriendRequest(@Path("requestId") requestId: String): Single<Response<Unit>>
 
-    @DELETE("/api/v1/friend/{user1Id}/{user2Id}")
+    @DELETE("${BASE_ROUTER}/friend/{user1Id}/{user2Id}")
     fun deleteFriend(
         @Path("user1Id") user1Id: String,
         @Path("user2Id") user2Id: String
     ): Single<Response<Unit>>
 
-    @GET("/api/v1/friend/requests/received/{userId}")
+    @GET("${BASE_ROUTER}/friend/requests/received/{userId}")
     fun getReceivedFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequest>>>
 
-    @GET("/api/v1/friend/requests/sent/{userId}")
+    @GET("${BASE_ROUTER}/friend/requests/sent/{userId}")
     fun getSentFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequest>>>
 
-    @GET("/api/v1/friend/friends/{userId}")
+    @GET("${BASE_ROUTER}/friend/friends/{userId}")
     fun getFriends(@Path("userId") userId: String): Single<Response<List<UserModel>>>
 }

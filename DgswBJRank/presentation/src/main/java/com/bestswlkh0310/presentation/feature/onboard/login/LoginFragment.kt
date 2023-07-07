@@ -8,7 +8,9 @@ import android.os.Build
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.viewModels
 import com.bestswlkh0310.presentation.base.BaseFragment
 import com.bestswlkh0310.presentation.databinding.FragmentLoginBinding
@@ -21,6 +23,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override val viewModel: LoginViewModel by viewModels()
+
+    private val registerForActivityResult =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            when (it) {
+                true -> {
+                }
+                false -> {
+                }
+        }
+        callback()
+    }
+    private lateinit var callback: () -> Unit
+
     override fun observerViewModel() {
         with(viewModel) {
             nickName.observe(this@LoginFragment) {
@@ -37,13 +52,13 @@ class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 WRONG_INPUT -> showToast("아이디 비밀 번호를 입력해 주세요")
                 CHECK_ALARM_PERMISSION -> checkAlarmPermission {
                     if (activity is OnBoardActivity) (activity as OnBoardActivity).startMainActivity()
-                    viewModel.updateAlarmToken()
                 }
             }
         }
     }
 
     private fun checkAlarmPermission(callback: () -> Unit) {
+        this.callback = callback
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.POST_NOTIFICATIONS)) {
@@ -54,16 +69,10 @@ class LoginFragment: BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                     requireActivity().finish()
                 } else {
                     // 처음 권한 요청을 할 경우
-                    registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                        when (it) {
-                            true -> {
-                            }
-                            false -> {
-                            }
-                        }
-                        callback()
-                    }.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    registerForActivityResult.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
+            } else {
+                callback()
             }
         }
     }

@@ -11,11 +11,16 @@ class PreferenceManager(context: Context) {
     var accessToken: String by PreferenceDelegate(ACCESS_TOKEN, "")
     var isAuthToken: Boolean by PreferenceDelegate(IS_AUTH_TOKEN, false)
     var alarmToken: String by PreferenceDelegate(ALARM_TOKEN, "")
+    var isSignUp: Boolean by PreferenceDelegate(IS_SIGN_UP, false)
+    var nickName: String by PreferenceDelegate(NICKNAME, "")
 
     fun delToken() {
         accessToken = ""
         refreshToken = ""
         isAuthToken = false
+//        alarmToken = ""
+        isSignUp = false
+        nickName = ""
     }
 
     companion object {
@@ -24,6 +29,8 @@ class PreferenceManager(context: Context) {
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val IS_AUTH_TOKEN = "IS_AUTH_TOKEN"
         const val ALARM_TOKEN = "ALARM_TOKEN"
+        const val IS_SIGN_UP = "IS_SIGN_UP"
+        const val NICKNAME = "NICKNAME"
     }
 
     private inner class PreferenceDelegate<T>(
