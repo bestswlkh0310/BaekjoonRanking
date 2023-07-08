@@ -6,11 +6,13 @@ import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.bestswlkh0310.presentation.util.Security
 import com.bestswlkh0310.presentation.util.Security.isPasswordValid
-import com.bestswlkh0310.presentation.util.Security.isUsernameValid
+import com.bestswlkh0310.presentation.util.Security.isUserIdValid
 import com.bestswlkh0310.domain.repository.AuthRepository
 import com.bestswlkh0310.domain.repository.GrassesRepository
 import com.bestswlkh0310.domain.repository.UserRepository
 import com.bestswlkh0310.presentation.util.Constant.TAAG
+import com.bestswlkh0310.presentation.util.DgswBJRankApplication.Companion.prefs
+import com.bestswlkh0310.presentation.util.Security.hashPassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -28,26 +30,23 @@ class SignInViewModel @Inject constructor(
     val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickLogin() {
-        if (nickName.value!! == "" || pw.value!! == "") {
-            viewEvent(WRONG_INPUT)
-        } else if (!isPasswordValid(pw.value!!) || !isUsernameValid(nickName.value!!)) {
-            viewEvent(NOT_FOUND_USER)
-        } else {
-            add(authRepository.signInUser(mapOf(
+        if (nickName.value!! == "" || pw.value!! == "") viewEvent(WRONG_INPUT)
+        else if (!isPasswordValid(pw.value!!) || !isUserIdValid(nickName.value!!)) viewEvent(NOT_FOUND_USER)
+        else { add(authRepository.signInUser(mapOf(
                     "userId" to nickName.value,
-                    "pw" to Security.hashPassword(pw.value!!),
+                    "pw" to hashPassword(pw.value!!),
                 )).subscribe({ response ->
                 when (response.code()) {
                     200 -> {
-                        val refreshToken = response.body()!!.refreshToken
-                        val accessToken = response.body()!!.accessToken
-                        Log.d(TAAG, "$refreshToken\n$accessToken - onClickLogin() called")
+                        val body = response.body()
+                        val refreshToken = body!!.refreshToken
+                        val accessToken = body.accessToken
+                        val id = body.id
                         with(DgswBJRankApplication) {
                             prefs.refreshToken = refreshToken
                             prefs.accessToken = accessToken
                             prefs.isAuthToken = true
-                            prefs.isSignUp = true
-                            prefs.nickName = nickName.value!!
+                            prefs.id = id
                         }
                         updateAlarmToken()
                         viewEvent(CHECK_ALARM_PERMISSION)
@@ -61,11 +60,9 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun updateAlarmToken() {
-        add(userRepository.updateAlarmToken(
-            mapOf(
-                "nickName" to DgswBJRankApplication.prefs.nickName,
-                "alarmToken" to DgswBJRankApplication.prefs.alarmToken
-            )
+        add(userRepository.updateAlarmToken(mapOf(
+                "id" to prefs.id,
+                "alarmToken" to prefs.alarmToken)
         ).subscribe({ response ->
             when (response.code()) {
                 200 -> Log.d(TAAG, "알림 토큰 전송 완료 - updateAlarmToken() called")

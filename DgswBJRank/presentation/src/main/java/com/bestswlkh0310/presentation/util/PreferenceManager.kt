@@ -11,16 +11,13 @@ class PreferenceManager(context: Context) {
     var accessToken: String by PreferenceDelegate(ACCESS_TOKEN, "")
     var isAuthToken: Boolean by PreferenceDelegate(IS_AUTH_TOKEN, false)
     var alarmToken: String by PreferenceDelegate(ALARM_TOKEN, "")
-    var isSignUp: Boolean by PreferenceDelegate(IS_SIGN_UP, false)
-    var nickName: String by PreferenceDelegate(NICKNAME, "")
+    var id: Int by PreferenceDelegate(NICKNAME, -1)
 
     fun delToken() {
         accessToken = ""
         refreshToken = ""
         isAuthToken = false
-//        alarmToken = ""
-        isSignUp = false
-        nickName = ""
+        id = -1
     }
 
     companion object {

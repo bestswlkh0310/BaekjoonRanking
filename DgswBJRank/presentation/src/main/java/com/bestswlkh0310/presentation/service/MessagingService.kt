@@ -2,7 +2,6 @@ package com.bestswlkh0310.presentation.service
 
 import android.util.Log
 import com.bestswlkh0310.domain.repository.UserRepository
-import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.Constant.TAAG
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import com.bestswlkh0310.presentation.util.NotificationHelper
@@ -36,13 +35,11 @@ class MessagingService: FirebaseMessagingService() {
         Log.d(TAAG, "$token - onNewToken() called")
         with(DgswBJRankApplication) {
             prefs.alarmToken = token
-            if (prefs.isSignUp) {
-                add(userRepository.updateAlarmToken(
-                    mapOf(
-                        "nickName" to prefs.nickName,
+            if (prefs.isAuthToken) {
+                add(userRepository.updateAlarmToken(mapOf(
+                        "nickName" to prefs.id,
                         "alarmToken" to prefs.alarmToken
-                    )
-                ).subscribe({ response ->
+                    )).subscribe({ response ->
                     when (response.code()) {
                         200 -> Log.d(TAAG, "알림 토큰 전송 완료 - updateAlarmToken() called")
                         404 -> Log.d(TAAG, "유저를 찾을 수 없습니다")

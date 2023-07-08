@@ -22,7 +22,6 @@ class OnBoardActivity: BaseActivity<ActivityOnBoardBinding, OnBoardViewModel>() 
 
     override fun onStart() {
         super.onStart()
-        DgswBJRankApplication.prefs.delToken()
         checkFirst()
     }
 

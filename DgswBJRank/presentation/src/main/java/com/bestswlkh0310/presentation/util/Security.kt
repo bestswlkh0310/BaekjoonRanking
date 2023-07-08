@@ -26,15 +26,28 @@ object Security {
         return String(hexChars)
     }
 
+    fun isUserIdValid(userId: String): Boolean {
+        // 숫자(필수), 영어(필수), 6~12글자
+        val pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z]).{6,12}$")
+        val matcher = pattern.matcher(userId)
+        return matcher.matches()
+    }
+
+    fun isNickNameValid(nickName: String): Boolean {
+        // 숫자, 영어 1~12글자
+        val pattern = Pattern.compile("^[a-zA-Z0-9]{1,12}$")
+        val matcher = pattern.matcher(nickName)
+        return matcher.matches()
+    }
+
     fun isPasswordValid(password: String): Boolean {
-        val pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^\\w\\s]).{8,12}$")
+        // 숫자(필수), 영어(필수), 6~12글자
+        val pattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^\\w\\s]).{6,12}$")
         val matcher = pattern.matcher(password)
         return matcher.matches()
     }
 
-    fun isUsernameValid(username: String): Boolean {
-        val pattern = Pattern.compile("^[a-zA-Z0-9]{4,12}$")
-        val matcher = pattern.matcher(username)
-        return matcher.matches()
-    }
+
+
+
 }
