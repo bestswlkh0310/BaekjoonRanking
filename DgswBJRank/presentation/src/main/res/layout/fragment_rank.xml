@@ -11,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/main50">
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -89,7 +88,6 @@
                 android:layout_marginStart="20dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="@drawable/btn_today"
                 android:onClick="@{() -> vm.getAllToday()}"
                 android:text="오늘"
                 style="@style/blackText"/>
@@ -101,7 +99,6 @@
                 app:layout_constraintTop_toTopOf="@id/today"
                 app:layout_constraintBottom_toBottomOf="@id/today"
                 app:layout_constraintStart_toEndOf="@id/today"
-                android:background="@drawable/btn_week"
                 android:text="시즌"
                 style="@style/blackText"/>
             <androidx.recyclerview.widget.RecyclerView

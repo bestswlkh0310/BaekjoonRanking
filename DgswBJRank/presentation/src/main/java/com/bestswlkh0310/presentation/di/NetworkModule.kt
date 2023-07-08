@@ -168,10 +168,10 @@ class AuthInterceptor @Inject constructor(
             val res = authRepository.get().getAccessToken(mapOf("refreshToken" to DgswBJRankApplication.prefs.refreshToken)).blockingGet()
             when (res.code()) {
                 200 -> {
-                    Log.d(TAAG, "새로운 토큰 - ${res.body()!!.token}")
-                    DgswBJRankApplication.prefs.accessToken = res.body()!!.token
+                    Log.d(TAAG, "새로운 토큰 - ${res.body()!!.accessToken}")
+                    DgswBJRankApplication.prefs.accessToken = res.body()!!.accessToken
                     val newRequest = request.newBuilder()
-                        .header("Authorization", "Bearer ${res.body()!!.token}")
+                        .header("Authorization", "Bearer ${res.body()!!.accessToken}")
                         .build()
                     return chain.proceed(newRequest)
                 }

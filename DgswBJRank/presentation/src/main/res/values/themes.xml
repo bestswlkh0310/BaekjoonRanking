@@ -8,14 +8,14 @@
         <item name="android:textViewStyle">@style/interTextViewFontStyle</item>
         <item name="colorPrimaryDark">@color/main100</item>
 
-        <item name="android:windowSplashScreenBackground" tools:targetApi="S">@color/white</item>
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="S">@drawable/logo</item>
-        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="S">@color/white</item>
-        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="S">@integer/material_motion_duration_medium_1</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="S">@color/main100</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="S">@drawable/background</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="S">@color/main100</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="S">@integer/material_motion_duration_medium_2</item>
     </style>
 
     <style name="interTextViewFontStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:textColor">@color/black</item>
     </style>
 </resources>

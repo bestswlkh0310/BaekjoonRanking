@@ -1,7 +1,7 @@
 package com.bestswlkh0310.data.remote
 
 import com.bestswlkh0310.data.Constants.BASE_ROUTER
-import com.bestswlkh0310.domain.entity.FriendRequest
+import com.bestswlkh0310.domain.entity.FriendRequestModel
 import com.bestswlkh0310.domain.entity.GrassesModel
 import com.bestswlkh0310.domain.entity.TodayModel
 import com.bestswlkh0310.domain.entity.UserModel
@@ -55,10 +55,10 @@ interface CRankAPI {
     ): Single<Response<Unit>>
 
     @GET("${BASE_ROUTER}/friend/requests/received/{userId}")
-    fun getReceivedFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequest>>>
+    fun getReceivedFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequestModel>>>
 
     @GET("${BASE_ROUTER}/friend/requests/sent/{userId}")
-    fun getSentFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequest>>>
+    fun getSentFriendRequests(@Path("userId") userId: String): Single<Response<List<FriendRequestModel>>>
 
     @GET("${BASE_ROUTER}/friend/friends/{userId}")
     fun getFriends(@Path("userId") userId: String): Single<Response<List<UserModel>>>

@@ -5,7 +5,7 @@
             <stroke android:color="@color/gray100"
                 android:width="1.5dp" />
             <corners android:radius="15dp"/>
-            <solid android:color="@color/white"/>
+            <solid android:color="@color/white100"/>
         </shape>
     </item>
     <item android:state_selected="true">
@@ -13,7 +13,7 @@
             <stroke android:color="@color/gray100"
                 android:width="1.5dp" />
             <corners android:radius="15dp"/>
-            <solid android:color="@color/white"/>
+            <solid android:color="@color/white100"/>
         </shape>
     </item>
 </selector>

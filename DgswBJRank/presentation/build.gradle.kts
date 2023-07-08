@@ -62,6 +62,8 @@ dependencies {
 
     implementation("org.mindrot:jbcrypt:0.4")
 
+    implementation("com.sothree.slidinguppanel:library:3.4.0")
+
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("com.trello.rxlifecycle2:rxlifecycle:2.1.0")

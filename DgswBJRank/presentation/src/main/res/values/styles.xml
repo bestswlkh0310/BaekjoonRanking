@@ -4,50 +4,62 @@
     <style name="blackTitle">
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
     <style name="whiteTitle">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/white100</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="blackSubTitle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="whiteSubTitle">
+        <item name="android:textColor">@color/white100</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 
     <style name="blackText">
         <item name="android:textColor">@color/black</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="whiteText">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/white100</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="mainText">
+        <item name="android:textColor">@color/main100</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <style name="grayText">
         <item name="android:textColor">@color/gray150</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
-    <style name="buttonStyle" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:height">57dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_marginHorizontal">34dp</item>
+    <style name="buttonDefaultStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:height">48dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginHorizontal">17dp</item>
     </style>
 
-    <style name="button1" parent="buttonStyle">
-        <item name="android:background">@drawable/btn_blue</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="btnMainStyle" parent="buttonDefaultStyle">
+        <item name="android:background">@drawable/btn_main</item>
+        <item name="android:textColor">@color/white100</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:fontWeight">700</item>
     </style>
-    <style name="button2" parent="buttonStyle">
-        <item name="android:background">@drawable/input_blue</item>
-        <item name="android:textColor">@color/main50</item>
-    </style>
-    <style name="button3" parent="buttonStyle">
-        <item name="android:background">@drawable/input_black</item>
-        <item name="android:textColorHint">@color/black</item>
-    </style>
-    <style name="button4" parent="buttonStyle">
-        <item name="android:background">@drawable/gray_input_background</item>
-        <item name="android:textColorHint">@color/black</item>
+    <style name="btnWhiteStyle" parent="buttonDefaultStyle">
+        <item name="android:background">@drawable/btn_white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:fontWeight">700</item>
     </style>
 </resources>

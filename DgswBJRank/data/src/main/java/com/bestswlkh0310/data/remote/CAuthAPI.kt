@@ -20,8 +20,8 @@ interface CAuthAPI {
     @POST("${BASE_ROUTER}/sign/check-duplicate-bjId/{bjId}")
     fun checkDuplicateBjId(@Path("bjId") bjId: String): Single<Response<Unit>>
 
-    @POST("${BASE_ROUTER}/sign/check-duplicate-nickName/{nickName}")
-    fun checkDuplicateNickName(@Path("nickName") nickName: String): Single<Response<Unit>>
+    @POST("${BASE_ROUTER}/sign/check-duplicate-userId/{userId}")
+    fun checkDuplicateNickName(@Path("userId") userId: String): Single<Response<Unit>>
 
     @POST("${BASE_ROUTER}/sign/access-token")
     fun getAccessToken(@Body body: Any?): Single<Response<AuthModel>>
