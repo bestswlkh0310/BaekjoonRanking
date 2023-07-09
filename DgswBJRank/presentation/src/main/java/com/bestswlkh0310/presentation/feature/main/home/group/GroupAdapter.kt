@@ -1,13 +1,13 @@
-package com.bestswlkh0310.presentation.feature.main.home.friends_now
+package com.bestswlkh0310.presentation.feature.main.home.group
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bestswlkh0310.presentation.databinding.ItemFriendsNowBinding
 
-class FriendsNowAdapter(
+class GroupAdapter(
     private val friendList: List<String>
-): RecyclerView.Adapter<FriendsNowAdapter.ViewHolder>() {
+): RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     inner class ViewHolder(binding: ItemFriendsNowBinding): RecyclerView.ViewHolder(binding.root) {
 
     }

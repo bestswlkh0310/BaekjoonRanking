@@ -11,8 +11,123 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/main100">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:text="내 프로필"
+            style="@style/whiteTitle"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rank"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/main_background"
+            android:elevation="14dp">
+            <TextView
+                android:id="@+id/nickName"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="admin123"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="60dp"
+                style="@style/blackTitle"
+                />
+            <TextView
+                android:id="@+id/bjId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="백준 아이디가 등록되지 않았어요!"
+                style="@style/grayText"
+                app:layout_constraintTop_toBottomOf="@id/nickName"
+                app:layout_constraintStart_toStartOf="@id/nickName"
+                app:layout_constraintEnd_toEndOf="@id/nickName"
+                />
+            <TextView
+                android:id="@+id/point_value"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/friend_value"
+                android:text="0"
+                android:layout_marginEnd="53dp"
+                android:layout_marginTop="20dp"
+                style="@style/blackTitle"
+                />
+            <TextView
+                android:id="@+id/point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/point_value"
+                app:layout_constraintEnd_toEndOf="@id/point_value"
+                app:layout_constraintTop_toBottomOf="@id/point_value"
+                android:text="포인트"
+                style="@style/blackText"
+                />
+            <TextView
+                android:id="@+id/friend_value"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                app:layout_constraintTop_toTopOf="@id/point_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="0"
+                style="@style/blackTitle"
+                android:layout_marginEnd="54dp"
+                />
+            <TextView
+                android:id="@+id/friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/friend_value"
+                app:layout_constraintEnd_toEndOf="@id/friend_value"
+                app:layout_constraintTop_toBottomOf="@id/friend_value"
+                android:text="친구"
+                style="@style/blackText"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/edit_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/setting"
+                app:layout_constraintTop_toBottomOf="@id/bjId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginEnd="6dp"
+                android:onClick="@{() -> vm.onClickEditProfile()}"
+                android:text="프로필 수정"
+                style="@style/btnGrayStyle"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="17dp"
+                android:layout_marginStart="6dp"
+                app:layout_constraintStart_toEndOf="@id/edit_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/edit_profile"
+                android:onClick="@{() -> vm.onClickSetting()}"
+                android:text="설정"
+                style="@style/btnGrayStyle"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="17dp"
+                app:layout_constraintTop_toBottomOf="@id/edit_profile"
+                android:layout_marginTop="28dp"
+                android:background="@color/gray100"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

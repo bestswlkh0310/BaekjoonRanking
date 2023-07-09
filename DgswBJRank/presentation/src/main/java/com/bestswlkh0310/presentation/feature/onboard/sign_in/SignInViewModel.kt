@@ -42,6 +42,7 @@ class SignInViewModel @Inject constructor(
                         val refreshToken = body!!.refreshToken
                         val accessToken = body.accessToken
                         val id = body.id
+                        Log.d(TAAG, "$id - onClickLogin() called")
                         with(DgswBJRankApplication) {
                             prefs.refreshToken = refreshToken
                             prefs.accessToken = accessToken
