@@ -3,17 +3,17 @@ package com.bestswlkh0310.presentation.feature.main.home.friend
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bestswlkh0310.presentation.databinding.ItemFriendsNowBinding
+import com.bestswlkh0310.presentation.databinding.ItemGroupBinding
 
 class FriendAdapter(
     private val friendList: List<String>
 ): RecyclerView.Adapter<FriendAdapter.ViewHolder>() {
-    inner class ViewHolder(binding: ItemFriendsNowBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: ItemGroupBinding): RecyclerView.ViewHolder(binding.root) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemFriendsNowBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
+        return ViewHolder(ItemGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
             itemView.setOnClickListener {
                 val friend = friendList[adapterPosition]
             }

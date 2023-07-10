@@ -100,7 +100,7 @@
             android:id="@+id/btn_next"
             android:text="@string/signUp"
             style="@style/btnMainStyle"
-            android:onClick="@{() -> vm.onClickSignUp()}"
+            android:onClick="@{() -> vm.onClickComplete()}"
             android:layout_marginBottom="99dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

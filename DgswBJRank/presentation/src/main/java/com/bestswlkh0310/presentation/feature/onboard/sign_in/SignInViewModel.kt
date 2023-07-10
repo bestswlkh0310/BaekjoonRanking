@@ -30,6 +30,7 @@ class SignInViewModel @Inject constructor(
     val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickLogin() {
+        return viewEvent(CHECK_ALARM_PERMISSION)
         if (nickName.value!! == "" || pw.value!! == "") viewEvent(WRONG_INPUT)
         else if (!isPasswordValid(pw.value!!) || !isUserIdValid(nickName.value!!)) viewEvent(NOT_FOUND_USER)
         else { add(authRepository.signInUser(mapOf(

@@ -31,7 +31,7 @@
             android:layout_height="70dp"
             android:background="@drawable/bottom_nav"
             app:itemIconTint="@color/bottom_nav_icon_hint"
-            app:itemTextColor="@color/black"
+            app:itemTextColor="@color/black100"
             app:itemIconSize="26dp"
             app:itemRippleColor="@color/gray100"
             app:layout_constraintStart_toStartOf="parent"

@@ -23,9 +23,3 @@
             style="@style/blackText"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-
-
-<!--<androidx.recyclerview.widget.RecyclerView-->
-<!--android:id="@+id/rv_friend"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"/>-->

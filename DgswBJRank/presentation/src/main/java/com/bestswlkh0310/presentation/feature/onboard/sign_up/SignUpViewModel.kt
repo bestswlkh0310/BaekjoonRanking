@@ -19,7 +19,7 @@ class SignUpViewModel @Inject constructor(
     val nickName = MutableLiveData<String>("")
     val pw = MutableLiveData<String>("")
 
-    fun onClickSignUp() {
+    fun onClickComplete() {
         if (userId.value == "" || nickName.value == "" || pw.value == "") viewEvent(WRONG_INPUT)
         else if (!isNickNameValid(nickName.value!!)) viewEvent(WRONG_NICKNAME)
         else if (!isUserIdValid(userId.value!!)) viewEvent(WRONG_ID)

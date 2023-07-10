@@ -1,6 +1,8 @@
 package com.bestswlkh0310.presentation.feature.main.profile
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.base.BaseFragment
 import com.bestswlkh0310.presentation.databinding.FragmentHomeBinding
 import com.bestswlkh0310.presentation.databinding.FragmentProfileBinding
@@ -14,8 +16,8 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileViewModel>() 
     override fun observerViewModel() {
         bindingViewEvent {  event ->
             when (event) {
-                ON_CLICK_SETTING -> showToast("setting")
-                ON_CLICK_EDIT_PROFILE -> showToast("edit profile")
+                ON_CLICK_EDIT_PROFILE -> findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+                ON_CLICK_SETTING -> findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
             }
         }
     }
