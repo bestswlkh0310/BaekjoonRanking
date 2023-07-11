@@ -10,6 +10,9 @@ import retrofit2.Response
 
 class CRankApiClient constructor(val api: CRankAPI) {
 
+    /**
+     * grass
+     */
     fun getToday(id: Int): Single<Response<TodayModel>> =
         api.getToday(id)
             .subscribeOn(Schedulers.io())
@@ -25,13 +28,11 @@ class CRankApiClient constructor(val api: CRankAPI) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
+    /**
+     * user
+     */
     fun updateAlarmToken(body: Any?): Single<Response<Unit>> =
         api.updateAlarmToken(body)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-    fun getPointById(id: Int): Single<Response<TodayModel>> =
-        api.getPointById(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -47,6 +48,20 @@ class CRankApiClient constructor(val api: CRankAPI) {
 
     fun saveUserDetail(body: Any?)=
         api.saveUserDetail(body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    /**
+     * point
+     */
+    fun getPointById(id: Int): Single<Response<TodayModel>> =
+        api.getPointById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+
+    fun createGroup(body: Any?): Single<Response<Unit>> =
+        api.createGroup(body)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

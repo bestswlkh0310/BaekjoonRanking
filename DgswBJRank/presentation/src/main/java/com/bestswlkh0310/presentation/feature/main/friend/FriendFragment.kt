@@ -1,4 +1,4 @@
-package com.bestswlkh0310.presentation.feature.main.home.friend
+package com.bestswlkh0310.presentation.feature.main.friend
 
 import androidx.fragment.app.viewModels
 import com.bestswlkh0310.presentation.base.BaseFragment

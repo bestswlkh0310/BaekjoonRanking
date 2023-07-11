@@ -1,4 +1,4 @@
-package com.bestswlkh0310.presentation.feature.main.home.group
+package com.bestswlkh0310.presentation.feature.main.group
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

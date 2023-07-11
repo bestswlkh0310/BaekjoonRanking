@@ -2,11 +2,12 @@ package com.bestswlkh0310.presentation.feature.main.home
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.base.BaseFragment
 import com.bestswlkh0310.presentation.databinding.FragmentHomeBinding
 import com.bestswlkh0310.presentation.feature.main.home.HomeViewModel.Companion.NOT_FOUND_BJ_ID
-import com.bestswlkh0310.presentation.feature.main.home.friend.FriendFragment
-import com.bestswlkh0310.presentation.feature.main.home.group.GroupFragment
+import com.bestswlkh0310.presentation.feature.main.friend.FriendFragment
+import com.bestswlkh0310.presentation.feature.main.group.GroupFragment
 import com.bestswlkh0310.presentation.util.Common.getTodayDate
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -48,29 +49,27 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private fun initFriendPager() {
-
         val viewPager = mBinding.viewPager
         val tabLayout = mBinding.tabLayout
-
         val adapter = FriendPagerAdapter(this)
         adapter.addFragment(FriendFragment(), "친구")
         adapter.addFragment(GroupFragment(), "그룹")
         viewPager.adapter = adapter
-
+        viewPager.offscreenPageLimit = 1
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = adapter.getPageTitle(position)
         }.attach()
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                val destination = adapter.createFragment(tab.position).id
-                val navController = findNavController()
-                navController.currentDestination?.getAction(destination)?.let {
-                    navController.navigate(destination, null, it.navOptions)
-                }
+                val position = tab.position
+                viewPager.setCurrentItem(position, true)
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
+
+
 }

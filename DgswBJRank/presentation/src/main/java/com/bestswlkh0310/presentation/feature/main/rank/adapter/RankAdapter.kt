@@ -19,25 +19,6 @@ class RankAdapter(
         val nickName = binding.nickName
         val solve = binding.solve
         val balloonView = binding.balloonView
-        init {
-            /*
-                val friend = friendList[adapterPosition]
-                Log.d(TAAG, "${friend.nickName}, ${friend.value}, ${friend.date} - onCreateViewHolder() called")
-                val cx = balloonView.width / 2
-                val cy = balloonView.height / 2
-                val finalRadius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
-
-                val animator: Animator = ViewAnimationUtils.createCircularReveal(balloonView, cx, cy, 0f, finalRadius)
-                animator.duration = 1000
-                balloonView.visibility = View.VISIBLE
-                animator.start()
-                animator.addListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        super.onAnimationEnd(animation)
-                        balloonView.visibility = View.INVISIBLE
-                    }
-                })*/
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

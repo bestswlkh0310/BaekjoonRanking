@@ -1,4 +1,4 @@
-package com.bestswlkh0310.presentation.feature.main.profile.edit_profile
+package com.bestswlkh0310.presentation.feature.main.edit_profile
 
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.domain.repository.UserRepository

@@ -1,14 +1,14 @@
-package com.bestswlkh0310.presentation.feature.main.profile.edit_profile
+package com.bestswlkh0310.presentation.feature.main.edit_profile
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bestswlkh0310.presentation.base.BaseFragment
 import com.bestswlkh0310.presentation.databinding.FragmentEditProfileBinding
-import com.bestswlkh0310.presentation.feature.main.profile.edit_profile.EditProfileViewModel.Companion.ALREADY_EXIST_BJ_ID
-import com.bestswlkh0310.presentation.feature.main.profile.edit_profile.EditProfileViewModel.Companion.NOT_VALID_BJ_ID
-import com.bestswlkh0310.presentation.feature.main.profile.edit_profile.EditProfileViewModel.Companion.ON_CLICK_BACK
-import com.bestswlkh0310.presentation.feature.main.profile.edit_profile.EditProfileViewModel.Companion.COMPLETE
-import com.bestswlkh0310.presentation.feature.main.profile.edit_profile.EditProfileViewModel.Companion.VALID_BJ_ID
+import com.bestswlkh0310.presentation.feature.main.edit_profile.EditProfileViewModel.Companion.ALREADY_EXIST_BJ_ID
+import com.bestswlkh0310.presentation.feature.main.edit_profile.EditProfileViewModel.Companion.NOT_VALID_BJ_ID
+import com.bestswlkh0310.presentation.feature.main.edit_profile.EditProfileViewModel.Companion.ON_CLICK_BACK
+import com.bestswlkh0310.presentation.feature.main.edit_profile.EditProfileViewModel.Companion.COMPLETE
+import com.bestswlkh0310.presentation.feature.main.edit_profile.EditProfileViewModel.Companion.VALID_BJ_ID
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

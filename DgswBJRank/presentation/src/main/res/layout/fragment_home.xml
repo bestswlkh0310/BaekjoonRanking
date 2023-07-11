@@ -62,7 +62,8 @@
                 app:tabGravity="center"
                 app:tabRippleColor="@color/gray100"
                 app:tabIndicator="@drawable/tab_indicator"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
+            </com.google.android.material.tabs.TabLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

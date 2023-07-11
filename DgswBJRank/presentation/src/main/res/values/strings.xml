@@ -18,4 +18,10 @@
     <string name="goal">목표</string>
     <string name="check_nickName">닉네임 확인</string>
     <string name="check_bjId">백준 아이디 확인</string>
+    <string name="find_group">그룹 찾기</string>
+    <string name="create_group">그룹 만들기</string>
+    <string name="create">만들기 (300P)</string>
+    <string name="group_name">그룹 이름</string>
+    <string name="group_description">그룹 설명</string>
+    <string name="group_limit">그룹원 수 제한</string>
 </resources>

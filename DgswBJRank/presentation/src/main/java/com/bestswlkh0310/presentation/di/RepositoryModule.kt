@@ -4,10 +4,12 @@ import com.bestswlkh0310.data.remote.CAuthApiClient
 import com.bestswlkh0310.data.remote.CRankApiClient
 import com.bestswlkh0310.data.repository.AuthRepositoryImpl
 import com.bestswlkh0310.data.repository.GrassesRepositoryImpl
+import com.bestswlkh0310.data.repository.GroupRepositoryImpl
 import com.bestswlkh0310.data.repository.PointRepositoryImpl
 import com.bestswlkh0310.data.repository.UserRepositoryImpl
 import com.bestswlkh0310.domain.repository.AuthRepository
 import com.bestswlkh0310.domain.repository.GrassesRepository
+import com.bestswlkh0310.domain.repository.GroupRepository
 import com.bestswlkh0310.domain.repository.PointRepository
 import com.bestswlkh0310.domain.repository.UserRepository
 import dagger.Module
@@ -39,4 +41,9 @@ object RepositoryModule {
     @Provides
     fun providePointRepository(apiClient: CRankApiClient): PointRepository =
         PointRepositoryImpl(apiClient)
+
+    @Singleton
+    @Provides
+    fun provideGroupRepository(apiClient: CRankApiClient): GroupRepository =
+        GroupRepositoryImpl(apiClient)
 }

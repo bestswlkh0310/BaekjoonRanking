@@ -49,6 +49,9 @@ interface CRankAPI {
      * group
      */
 
+    @POST("${BASE_ROUTER}/group/new-group")
+    fun createGroup(@Body body: Any?): Single<Response<Unit>>
+
     /**
      * point
      */
