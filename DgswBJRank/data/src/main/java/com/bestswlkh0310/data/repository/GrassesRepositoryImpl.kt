@@ -5,7 +5,7 @@ import com.bestswlkh0310.domain.repository.GrassesRepository
 import javax.inject.Inject
 
 class GrassesRepositoryImpl @Inject constructor(private val apiClient: CRankApiClient): GrassesRepository {
-    override fun getToday(bjId: String) = apiClient.getToday(bjId)
-    override fun getGrasses(bjId: String) = apiClient.getGrasses(bjId)
+    override fun getToday(id: Int) = apiClient.getToday(id)
+    override fun getGrasses(id: Int) = apiClient.getGrasses(id)
     override fun getAllGrasses() = apiClient.getAllGrasses()
 }

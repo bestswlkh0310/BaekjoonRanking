@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RankViewModel @Inject constructor(
-    private val userRepository: GrassesRepository,
+    private val grassesRepository: GrassesRepository,
     private val authRepository: AuthRepository
 ): BaseViewModel() {
 
@@ -27,17 +27,21 @@ class RankViewModel @Inject constructor(
     }
 
     fun getSeasonTotal() {
-        add(userRepository.getAllGrasses().subscribe({ response ->
+        add(grassesRepository.getAllGrasses().subscribe({ response ->
             when (response.code()) {
                 200 -> {
                     val grasses = response.body()
-                    val result = grasses!!.sumOf {
-                        val calendar = Calendar.getInstance()
-                        with(calendar) { set(get(Calendar.YEAR), get(Calendar.MONTH), 1) }
-                        val startDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(calendar.time)
-                        it.grasses.filter { day -> startDate.toInt() <= day.date }.sumOf { value -> value.value }
+                    if (grasses == null) {
+                        viewEvent(NOT_EXIST_USER)
+                    } else {
+                        val result = grasses.sumOf {
+                            val calendar = Calendar.getInstance()
+                            with(calendar) { set(get(Calendar.YEAR), get(Calendar.MONTH), 1) }
+                            val startDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(calendar.time)
+                            it.grasses.filter { day -> startDate.toInt() <= day.date }.sumOf { value -> value.value }
+                        }
+                        seasonTotal.value = result
                     }
-                    seasonTotal.value = result
                 }
             }
         }) {
@@ -46,20 +50,24 @@ class RankViewModel @Inject constructor(
     }
 
     fun getAllToday() {
-        add(userRepository.getAllGrasses().subscribe({ response ->
+        add(grassesRepository.getAllGrasses().subscribe({ response ->
             when (response.code()) {
                 200 -> {
                     reload()
                     val grasses = response.body()
                     val rankData = mutableListOf<RankModel>()
-                    grasses!!.forEach {
-                        val today = it.grasses.first()
-                        val realToday = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
-                        val resultValue = if (realToday == today.date.toString()) today.value else 0
-                        rankData.add(RankModel(it.nickName, resultValue, it.bjId))
+                    if (grasses == null) {
+                        viewEvent(NOT_EXIST_USER)
+                    } else {
+                        grasses.forEach {
+                            val today = it.grasses.first()
+                            val realToday = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+                            val resultValue = if (realToday == today.date.toString()) today.value else 0
+                            rankData.add(RankModel(it.nickName, resultValue, it.bjId))
+                        }
+                        rankList.value!!.addAll(rankData.sortedWith(compareBy { it.value }).reversed())
+                        viewEvent(ADD_ALL_RANK)
                     }
-                    rankList.value!!.addAll(rankData.sortedWith(compareBy { it.value }).reversed())
-                    viewEvent(ADD_ALL_RANK)
                 }
             }
         }) {
@@ -68,7 +76,7 @@ class RankViewModel @Inject constructor(
     }
 
     fun getAllSeason() {
-        add(userRepository.getAllGrasses().subscribe({ response ->
+        add(grassesRepository.getAllGrasses().subscribe({ response ->
             when (response.code()) {
                 200 -> {
                     reload()
@@ -93,5 +101,6 @@ class RankViewModel @Inject constructor(
     companion object {
         const val ADD_ALL_RANK = 0
         const val REMOVE_ALL = 1
+        const val NOT_EXIST_USER = 2
     }
 }

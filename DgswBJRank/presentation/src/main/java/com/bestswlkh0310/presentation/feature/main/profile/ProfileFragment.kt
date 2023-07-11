@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileViewModel>() {
     override val viewModel: ProfileViewModel by viewModels()
+    override val hasBottomNav = true
+
     override fun observerViewModel() {
         bindingViewEvent {  event ->
             when (event) {
@@ -20,5 +22,14 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileViewModel>() 
                 ON_CLICK_SETTING -> findNavController().navigate(R.id.action_profileFragment_to_settingFragment)
             }
         }
+
+        with(viewModel) {
+            point.observe(this@ProfileFragment) { mBinding.pointValue.text = it.toString() + "P" }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.initPoint()
     }
 }

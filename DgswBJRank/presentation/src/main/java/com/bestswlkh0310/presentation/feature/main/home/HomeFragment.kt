@@ -1,28 +1,38 @@
 package com.bestswlkh0310.presentation.feature.main.home
 
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
-import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.base.BaseFragment
 import com.bestswlkh0310.presentation.databinding.FragmentHomeBinding
+import com.bestswlkh0310.presentation.feature.main.home.HomeViewModel.Companion.NOT_FOUND_BJ_ID
 import com.bestswlkh0310.presentation.feature.main.home.friend.FriendFragment
 import com.bestswlkh0310.presentation.feature.main.home.group.GroupFragment
-import com.bestswlkh0310.presentation.feature.main.profile.ProfileFragment
-import com.bestswlkh0310.presentation.feature.main.rank.RankFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+    override val hasBottomNav = true
     override val viewModel: HomeViewModel by viewModels()
     override fun observerViewModel() {
+        with(viewModel) {
+            point.observe(this@HomeFragment) { mBinding.btnPoint.text = it.toString() + "P" }
+            solve.observe(this@HomeFragment) { mBinding.solve.text = it.toString() + " 문제" }
+        }
 
+        bindingViewEvent {  event ->
+            when (event) {
+                NOT_FOUND_BJ_ID -> mBinding.solve.text = "백준 아이디가 없어요!"
+            }
+        }
     }
 
     override fun onStart() {
         super.onStart()
         initFriendPager()
+        viewModel.initPoint()
+        viewModel.initSolve()
     }
 
     private fun initFriendPager() {

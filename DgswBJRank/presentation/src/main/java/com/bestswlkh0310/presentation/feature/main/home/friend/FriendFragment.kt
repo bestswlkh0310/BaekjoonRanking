@@ -6,6 +6,7 @@ import com.bestswlkh0310.presentation.databinding.FragmentFriendBinding
 
 class FriendFragment: BaseFragment<FragmentFriendBinding, FriendViewModel>() {
     override val viewModel: FriendViewModel by viewModels()
+    override val hasBottomNav = true
 
     override fun observerViewModel() {
 

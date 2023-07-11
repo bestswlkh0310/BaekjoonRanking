@@ -2,6 +2,7 @@ package com.bestswlkh0310.presentation.feature.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isInvisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,4 +23,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val navController = navHostFragment.findNavController()
         mBinding.bottomNav.setupWithNavController(navController)
     }
+
+    fun setNavVisible(demand: Boolean) {
+        mBinding.bottomNav.isInvisible = demand
+    }
+
 }

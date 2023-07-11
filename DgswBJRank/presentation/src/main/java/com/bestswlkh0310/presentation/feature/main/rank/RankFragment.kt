@@ -15,6 +15,7 @@ class RankFragment: BaseFragment<FragmentRankBinding, RankViewModel>() {
     override val viewModel: RankViewModel by viewModels()
 
     lateinit var adapter: RankAdapter
+    override val hasBottomNav = true
 
     override fun observerViewModel() {
         bindingViewEvent { event ->

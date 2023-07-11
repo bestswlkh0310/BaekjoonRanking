@@ -6,6 +6,7 @@ import com.bestswlkh0310.presentation.databinding.FragmentGroupBinding
 
 class GroupFragment: BaseFragment<FragmentGroupBinding, GroupViewModel>() {
     override val viewModel: GroupViewModel by viewModels()
+    override val hasBottomNav = true
 
     override fun observerViewModel() {
         

@@ -2,6 +2,7 @@ package com.bestswlkh0310.data.remote
 
 import com.bestswlkh0310.domain.entity.GrassesModel
 import com.bestswlkh0310.domain.entity.TodayModel
+import com.bestswlkh0310.domain.entity.UserModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -9,13 +10,13 @@ import retrofit2.Response
 
 class CRankApiClient constructor(val api: CRankAPI) {
 
-    fun getToday(bjId: String): Single<Response<List<TodayModel>>> =
-        api.getToday(bjId)
+    fun getToday(id: Int): Single<Response<TodayModel>> =
+        api.getToday(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun getGrasses(bjId: String): Single<Response<GrassesModel>> =
-        api.getGrasses(bjId)
+    fun getGrasses(id: Int): Single<Response<GrassesModel>> =
+        api.getGrasses(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -26,6 +27,26 @@ class CRankApiClient constructor(val api: CRankAPI) {
 
     fun updateAlarmToken(body: Any?): Single<Response<Unit>> =
         api.updateAlarmToken(body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun getPointById(id: Int): Single<Response<TodayModel>> =
+        api.getPointById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun getUserById(id: Int): Single<Response<UserModel>> =
+        api.getUserById(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun checkDuplicateBjId(bjId: String, id: Int) =
+        api.checkDuplicateBjId(bjId, id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun saveUserDetail(body: Any?)=
+        api.saveUserDetail(body)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

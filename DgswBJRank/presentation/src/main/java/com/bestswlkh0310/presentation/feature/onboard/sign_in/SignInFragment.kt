@@ -39,14 +39,6 @@ class SignInFragment: BaseFragment<FragmentSignInBinding, SignInViewModel>() {
     private lateinit var callback: () -> Unit
 
     override fun observerViewModel() {
-        with(viewModel) {
-            nickName.observe(this@SignInFragment) {
-                nickNameState.value = (it != "" || pwState.value!!)
-            }
-            pw.observe(this@SignInFragment) {
-                pwState.value = it != ""
-            }
-        }
 
         bindingViewEvent {
             when (it) {

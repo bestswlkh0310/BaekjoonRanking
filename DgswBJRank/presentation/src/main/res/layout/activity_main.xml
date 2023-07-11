@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".feature.main.MainActivity">
     <data>
+
         <variable
             name="vm"
             type="com.bestswlkh0310.presentation.feature.main.MainViewModel" />

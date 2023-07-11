@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
-import com.bestswlkh0310.presentation.util.Security
 import com.bestswlkh0310.presentation.util.Security.isPasswordValid
 import com.bestswlkh0310.presentation.util.Security.isUserIdValid
 import com.bestswlkh0310.domain.repository.AuthRepository
@@ -23,18 +22,14 @@ class SignInViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): BaseViewModel() {
 
-    val nickName = MutableLiveData<String>("")
-    val nickNameState = MutableLiveData<Boolean>(false)
-
+    val id = MutableLiveData<String>("")
     val pw = MutableLiveData<String>("")
-    val pwState = MutableLiveData<Boolean>(false)
 
     fun onClickLogin() {
-        return viewEvent(CHECK_ALARM_PERMISSION)
-        if (nickName.value!! == "" || pw.value!! == "") viewEvent(WRONG_INPUT)
-        else if (!isPasswordValid(pw.value!!) || !isUserIdValid(nickName.value!!)) viewEvent(NOT_FOUND_USER)
+        if (id.value!! == "" || pw.value!! == "") viewEvent(WRONG_INPUT)
+        else if (!isPasswordValid(pw.value!!) || !isUserIdValid(id.value!!)) viewEvent(NOT_FOUND_USER)
         else { add(authRepository.signInUser(mapOf(
-                    "userId" to nickName.value,
+                    "userId" to id.value,
                     "pw" to hashPassword(pw.value!!),
                 )).subscribe({ response ->
                 when (response.code()) {

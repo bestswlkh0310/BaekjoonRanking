@@ -33,6 +33,125 @@
             android:layout_marginTop="42dp"
             android:layout_marginStart="12dp"
             android:background="@null"/>
+        <TextView
+            android:id="@+id/tv_nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nickName"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="18dp"
+            style="@style/blackSubTitle"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_nickName"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickName"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginHorizontal="17dp"
+            android:hint="@string/nickName"
+            style="@style/blackText"
+            android:text="@={vm.nickName}"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/gray100"
+            android:maxLength="12"
+            android:inputType="text"
+            android:focusableInTouchMode="false"
+            android:textCursorDrawable="@color/black100"/>
+        <TextView
+            android:id="@+id/tv_bjId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bjId"
+            app:layout_constraintTop_toBottomOf="@id/et_nickName"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="6dp"
+            style="@style/blackSubTitle"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_bjid"
+            app:layout_constraintTop_toBottomOf="@id/tv_bjId"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginHorizontal="17dp"
+            style="@style/blackText"
+            android:maxLength="20"
+            android:text="@={vm.bjId}"
+            android:inputType="text"
+            android:textCursorDrawable="@color/black100"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/gray100"
+            android:hint="@string/bjId"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_check_bjId"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            style="@style/btnMainStyle"
+            app:layout_constraintEnd_toEndOf="@id/et_bjid"
+            app:layout_constraintTop_toBottomOf="@id/et_bjid"
+            android:onClick="@{() -> vm.onClickCheckBjId()}"
+            android:text="@string/check_bjId"/>
+        <TextView
+            android:id="@+id/tv_intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/intro"
+            app:layout_constraintTop_toBottomOf="@id/btn_check_bjId"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="6dp"
+            style="@style/blackSubTitle"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_intro"
+            app:layout_constraintTop_toBottomOf="@id/tv_intro"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginHorizontal="17dp"
+            style="@style/blackText"
+            android:maxLength="20"
+            android:text="@={vm.intro}"
+            android:inputType="text"
+            android:textCursorDrawable="@color/black100"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/gray100"
+            android:hint="@string/intro"/>
+        <TextView
+            android:id="@+id/tv_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goal"
+            app:layout_constraintTop_toBottomOf="@id/et_intro"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="6dp"
+            style="@style/blackSubTitle"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_goal"
+            app:layout_constraintTop_toBottomOf="@id/tv_goal"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginHorizontal="17dp"
+            style="@style/blackText"
+            android:maxLength="20"
+            android:text="@={vm.goal}"
+            android:inputType="text"
+            android:textCursorDrawable="@color/black100"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/gray100"
+            android:hint="@string/goal"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete"
@@ -47,15 +166,16 @@
 
         <TextView
             android:id="@+id/btn_cancle"
-            android:text="@string/cancel"
-            style="@style/btnWhiteStyle"
-            android:onClick="@{() -> vm.onClickComplete()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.onClickBack()}"
             android:layout_marginBottom="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="@string/cancel"
+            style="@style/btnWhiteStyle"
+            android:elevation="0dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

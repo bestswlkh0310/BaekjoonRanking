@@ -35,32 +35,46 @@
             android:layout_marginTop="42dp"
             android:layout_marginStart="12dp"
             android:background="@null"/>
+        <TextView
+            android:id="@+id/tv_nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nickName"
+            android:layout_marginTop="18dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            style="@style/blackSubTitle"/>
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_nickName"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintEnd_toEndOf="@id/title"
-            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickName"
             android:layout_height="57dp"
             android:layout_width="match_parent"
             android:backgroundTint="@color/gray100"
             style="@style/blackText"
             android:maxLength="12"
-            android:paddingStart="18dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginHorizontal="17dp"
             android:text="@={vm.nickName}"
             android:textAllCaps="false"
             android:inputType="text"
             android:hint="@string/nickName"/>
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_pw"
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/id"
+            android:layout_marginTop="6dp"
             app:layout_constraintTop_toBottomOf="@id/et_nickName"
+            app:layout_constraintStart_toStartOf="@id/et_id"
+            style="@style/blackSubTitle"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_id"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintEnd_toEndOf="@id/title"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="-20dp"
             android:maxLength="12"
-            android:paddingStart="18dp"
             android:backgroundTint="@color/gray100"
             android:layout_marginHorizontal="17dp"
             style="@style/blackText"
@@ -70,18 +84,27 @@
             android:hint="@string/id"
             android:layout_width="match_parent"
             android:layout_height="57dp"/>
+        <TextView
+            android:id="@+id/tv_bjId"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pw"
+            app:layout_constraintStart_toStartOf="@id/et_nickName"
+            app:layout_constraintTop_toBottomOf="@id/et_id"
+            style="@style/blackSubTitle"/>
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_bjId"
-            app:layout_constraintTop_toBottomOf="@id/et_pw"
+            android:id="@+id/et_pw"
+            app:layout_constraintTop_toBottomOf="@id/tv_bjId"
             app:layout_constraintStart_toStartOf="@id/et_nickName"
             app:layout_constraintEnd_toEndOf="@id/et_nickName"
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="57dp"
-            android:paddingStart="18dp"
             android:layout_marginHorizontal="17dp"
             android:text="@={vm.pw}"
             android:backgroundTint="@color/gray100"
+            android:layout_marginTop="-20dp"
+
             style="@style/blackText"
             android:textAllCaps="false"
             android:inputType="textPassword"
@@ -91,8 +114,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/et_bjId"
-            app:layout_constraintBottom_toBottomOf="@id/et_bjId"
+            app:layout_constraintTop_toTopOf="@id/et_pw"
+            app:layout_constraintBottom_toBottomOf="@id/et_pw"
             android:paddingRight="18dp"
             style="@style/blackText"
             app:layout_constraintEnd_toEndOf="@id/et_nickName"/>

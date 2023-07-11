@@ -74,7 +74,7 @@
                 app:layout_constraintBottom_toTopOf="@id/btn_signUp"
                 android:text="로그인"
                 style="@style/btnWhiteStyle"/>
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
                 android:id="@+id/btn_signUp"
                 app:layout_constraintTop_toBottomOf="@id/btn_signIn"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,6 +83,7 @@
                 android:layout_marginBottom="48dp"
                 android:text="회원가입"
                 android:background="@color/main100"
+                android:elevation="0dp"
                 style="@style/btnMainStyle"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>

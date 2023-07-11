@@ -1,5 +1,6 @@
 package com.bestswlkh0310.presentation.feature.main
 
+import androidx.lifecycle.MutableLiveData
 import com.bestswlkh0310.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -8,5 +9,4 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
 //    private val
 ): BaseViewModel() {
-
 }

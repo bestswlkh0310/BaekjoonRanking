@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.bestswlkh0310.presentation.R
 import com.bestswlkh0310.presentation.BR
 import com.bestswlkh0310.presentation.base.BaseViewModel.Companion.NETWORK_ERROR
+import com.bestswlkh0310.presentation.feature.main.MainActivity
 import com.bestswlkh0310.presentation.feature.onboard.OnBoardActivity
 import com.bestswlkh0310.presentation.util.DgswBJRankApplication
 import java.lang.reflect.ParameterizedType
@@ -27,6 +28,8 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
 
     private var isLoad = false
     private var isLoad2 = false
+
+    protected open val hasBottomNav: Boolean = false
 
     protected abstract fun observerViewModel()
 
@@ -47,6 +50,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
         super.onViewCreated(view, savedInstanceState)
         performDataBinding()
         observerViewModel()
+        (activity as? MainActivity)?.setNavVisible(!hasBottomNav)
     }
 
     private fun performDataBinding() {

@@ -6,7 +6,7 @@ import io.reactivex.Single
 import retrofit2.Response
 
 interface GrassesRepository {
-    fun getToday(bjId: String): Single<Response<List<TodayModel>>>
-    fun getGrasses(bjId: String): Single<Response<GrassesModel>>
+    fun getToday(id: Int): Single<Response<TodayModel>>
+    fun getGrasses(id: Int): Single<Response<GrassesModel>>
     fun getAllGrasses(): Single<Response<List<GrassesModel>>>
 }
