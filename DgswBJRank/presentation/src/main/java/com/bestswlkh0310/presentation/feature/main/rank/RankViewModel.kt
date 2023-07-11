@@ -5,6 +5,7 @@ import com.bestswlkh0310.presentation.base.BaseViewModel
 import com.bestswlkh0310.domain.dto.RankModel
 import com.bestswlkh0310.domain.repository.AuthRepository
 import com.bestswlkh0310.domain.repository.GrassesRepository
+import com.bestswlkh0310.presentation.util.Common.getTodayDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -61,7 +62,7 @@ class RankViewModel @Inject constructor(
                     } else {
                         grasses.forEach {
                             val today = it.grasses.first()
-                            val realToday = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
+                            val realToday = getTodayDate()
                             val resultValue = if (realToday == today.date.toString()) today.value else 0
                             rankData.add(RankModel(it.nickName, resultValue, it.bjId))
                         }

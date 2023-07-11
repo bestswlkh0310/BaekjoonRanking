@@ -7,9 +7,14 @@ import com.bestswlkh0310.presentation.databinding.FragmentHomeBinding
 import com.bestswlkh0310.presentation.feature.main.home.HomeViewModel.Companion.NOT_FOUND_BJ_ID
 import com.bestswlkh0310.presentation.feature.main.home.friend.FriendFragment
 import com.bestswlkh0310.presentation.feature.main.home.group.GroupFragment
+import com.bestswlkh0310.presentation.util.Common.getTodayDate
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.format.TextStyle
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
@@ -33,6 +38,13 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         initFriendPager()
         viewModel.initPoint()
         viewModel.initSolve()
+        initDate()
+    }
+
+    private fun initDate() {
+        val (year, month, day) = LocalDate.now().toString().split('-').map { it.replace("0", "") }
+        val dayOfWeek = LocalDate.now().dayOfWeek.getDisplayName(TextStyle.FULL, Locale("ko", "KR"))[0]
+        mBinding.date.text = "${month}. ${day}. (${dayOfWeek})"
     }
 
     private fun initFriendPager() {
