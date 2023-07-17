@@ -109,7 +109,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/check_account_2"
             style="@style/blackText"
-            android:text="아직 계정이 없으신가요?  "
+            android:text="아직 계정이 없으시다면?  "
             app:layout_constraintHorizontal_chainStyle="packed" />
         <TextView
             app:layout_constraintTop_toBottomOf="@id/btn_next"

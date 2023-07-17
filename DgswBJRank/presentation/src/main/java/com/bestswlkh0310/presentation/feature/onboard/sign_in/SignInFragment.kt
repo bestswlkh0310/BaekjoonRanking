@@ -29,10 +29,8 @@ class SignInFragment: BaseFragment<FragmentSignInBinding, SignInViewModel>() {
     private val registerForActivityResult =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             when (it) {
-                true -> {
-                }
-                false -> {
-                }
+                true -> {}
+                false -> {}
         }
         callback()
     }
@@ -44,9 +42,7 @@ class SignInFragment: BaseFragment<FragmentSignInBinding, SignInViewModel>() {
             when (it) {
                 NOT_FOUND_USER -> showToast("올바른 아이디 비밀 번호를 입력해 주세요")
                 WRONG_INPUT -> showToast("아이디 비밀 번호를 입력해 주세요")
-                CHECK_ALARM_PERMISSION -> checkAlarmPermission {
-                    if (activity is OnBoardActivity) (activity as OnBoardActivity).startMainActivity()
-                }
+                CHECK_ALARM_PERMISSION -> checkAlarmPermission { if (activity is OnBoardActivity) (activity as OnBoardActivity).startMainActivity() }
                 ON_CLICK_BACK -> findNavController().popBackStack()
                 ON_CLICK_SIGN_UP -> findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
             }

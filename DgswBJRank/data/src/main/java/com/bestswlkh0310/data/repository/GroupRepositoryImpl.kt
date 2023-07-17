@@ -10,4 +10,6 @@ class GroupRepositoryImpl @Inject constructor(
     private val apiClient: CRankApiClient
 ): GroupRepository {
     override fun createGroup(body: Any?) = apiClient.createGroup(body)
+    override fun getAllGroup() = apiClient.getAllGroup()
+    override fun join(body: Any?) = apiClient.join(body)
 }

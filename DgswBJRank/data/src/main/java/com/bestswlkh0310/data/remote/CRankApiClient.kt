@@ -1,6 +1,7 @@
 package com.bestswlkh0310.data.remote
 
 import com.bestswlkh0310.domain.entity.GrassesModel
+import com.bestswlkh0310.domain.entity.GroupModel
 import com.bestswlkh0310.domain.entity.TodayModel
 import com.bestswlkh0310.domain.entity.UserModel
 import io.reactivex.Single
@@ -60,8 +61,21 @@ class CRankApiClient constructor(val api: CRankAPI) {
             .observeOn(AndroidSchedulers.mainThread())
 
 
+    /**
+     * group
+     */
+
     fun createGroup(body: Any?): Single<Response<Unit>> =
         api.createGroup(body)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun getAllGroup(): Single<Response<List<GroupModel>>> =
+        api.getAllGroup()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    fun join(body: Any?): Single<Response<Unit>> =
+        api.join(body)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

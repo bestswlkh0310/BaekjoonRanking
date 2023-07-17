@@ -7,6 +7,7 @@
             type="com.bestswlkh0310.presentation.feature.main.find_group.FindGroupViewModel" />
     </data>
     <androidx.cardview.widget.CardView
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="1dp"
