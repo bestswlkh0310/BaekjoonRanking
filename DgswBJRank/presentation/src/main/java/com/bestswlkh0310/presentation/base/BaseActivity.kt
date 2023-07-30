@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.bestswlkh0310.presentation.R
-import com.bestswlkh0310.presentation.BR
 import java.lang.reflect.ParameterizedType
+import com.bestswlkh0310.presentation.BR
 import java.util.Locale
 import java.util.Objects
 
@@ -31,7 +31,6 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         mBinding.setVariable(BR.vm, mViewModel)
         mBinding.lifecycleOwner = this
     }
-
 
     protected fun bindingViewEvent(action: (event: Any) -> Unit) {
         viewModel.viewEvent.observe(this) { event ->

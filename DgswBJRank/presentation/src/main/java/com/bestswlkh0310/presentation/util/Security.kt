@@ -46,8 +46,4 @@ object Security {
         val matcher = pattern.matcher(password)
         return matcher.matches()
     }
-
-
-
-
 }

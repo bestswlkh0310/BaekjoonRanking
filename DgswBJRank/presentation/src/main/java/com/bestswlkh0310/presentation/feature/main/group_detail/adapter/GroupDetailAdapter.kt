@@ -31,9 +31,9 @@ class GroupDetailAdapter(
         val user = userList[position]
         holder.rank.text = (position + 1).toString()
         holder.nickName.text = user.nickName
-        holder.solve.text = user.value.toString() + " 문제"
-        holder.itemView.setOnClickListener {
-            onclick(user.bjId, user.nickName!!)
-        }
+//        holder.solve.text = user.value.toString() + " 문제"
+//        holder.itemView.setOnClickListener {
+//            onclick(user.bjId, user.nickName!!)
+//        }
     }
 }

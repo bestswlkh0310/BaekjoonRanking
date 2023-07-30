@@ -52,6 +52,7 @@
             android:elevation="10dp"
             android:background="@color/white100">
             <com.google.android.material.tabs.TabLayout
+                android:contentDescription="asdad"
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

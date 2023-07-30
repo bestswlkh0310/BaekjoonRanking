@@ -22,7 +22,6 @@ class StartFragmentD: BaseFragment<FragmentStartDBinding, StartViewModelD>() {
         initButtonListener()
     }
 
-
     private fun initButtonListener() {
         with(mBinding) {
             btnStart.setOnClickListener {
